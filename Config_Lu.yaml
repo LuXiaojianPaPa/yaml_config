@@ -1,552 +1,956 @@
+# HTTP(S) 和 SOCKS4(A)/SOCKS5 代理服务共用一个端口
 mixed-port: 7890
-allow-lan: true
-bind-address: '*'
-mode: rule
-log-level: debug
-external-controller: '127.0.0.1:9090'
-dns:
-    enable: true
-    ipv6: false
-    default-nameserver: [223.5.5.5, 119.29.29.29]
-    enhanced-mode: fake-ip
-    fake-ip-range: 198.18.0.1/16
-    use-hosts: true
-    nameserver: ['https://doh.pub/dns-query', 'https://dns.alidns.com/dns-query']
-    fallback: ['https://doh.dns.sb/dns-query', 'https://dns.cloudflare.com/dns-query', 'https://dns.twnic.tw/dns-query', 'tls://8.8.4.4:853']
-    fallback-filter: { geoip: true, ipcidr: [240.0.0.0/4, 0.0.0.0/32] }
-proxies:
-    - { name: 'Trojan-Singapore', type: trojan, server: tg.luwangxinqi.me, port: 443, password: vaGXL3J9Oljuc7rX, udp: true, sni: tg.luwangxinqi.me }
-    - { name: 'Trojan-New Jersey', type: trojan, server: tg.stephenlu.cc, port: 443, password: tlqaVjwvZo8Ed2iI, udp: true, sni: tg.stephenlu.cc }
-    - { name: '🇯🇵 日本.Y | 直连 | Trojan', type: trojan, server: jpy.cloud-services.top, port: 443, password: 20d3bae6-fa82-4caa-899b-ea25f1bce5e0, udp: true, sni: zs.cloud-services.top }
-    - { name: '🇭🇰 香港.B | 中转 | Trojan', type: trojan, server: east.cutecloud.link, port: 52002, password: 20d3bae6-fa82-4caa-899b-ea25f1bce5e0, udp: true, sni: zs.cloud-services.top }
-    - { name: '🇹🇼 台湾.A | 中转 | Trojan', type: trojan, server: best.cutecloud.link, port: 52924, password: 20d3bae6-fa82-4caa-899b-ea25f1bce5e0, udp: true, sni: zs.cloud-services.top }
-    - { name: '🇹🇼 台湾.Y | 直连 | Trojan', type: trojan, server: twy.cloud-services.top, port: 443, password: 20d3bae6-fa82-4caa-899b-ea25f1bce5e0, udp: true, sni: zs.cloud-services.top }
-    - { name: '🇯🇵 东京.A | 中转 | Trojan', type: trojan, server: fast.cutecloud.link, port: 52101, password: 20d3bae6-fa82-4caa-899b-ea25f1bce5e0, udp: true, sni: zs.cloud-services.top }
-    - { name: '🇯🇵 东京.B | 中转 | Trojan', type: trojan, server: fast.cutecloud.link, port: 52102, password: 20d3bae6-fa82-4caa-899b-ea25f1bce5e0, udp: true, sni: zs.cloud-services.top }
-    - { name: '🇯🇵 东京.C | 中转 | Trojan', type: trojan, server: fast.cutecloud.link, port: 52103, password: 20d3bae6-fa82-4caa-899b-ea25f1bce5e0, udp: true, sni: zs.cloud-services.top }
-    - { name: '🇯🇵 日本.A | 中转 | Trojan', type: trojan, server: fast.cutecloud.link, port: 52111, password: 20d3bae6-fa82-4caa-899b-ea25f1bce5e0, udp: true, sni: zs.cloud-services.top }
-    - { name: '🇸🇬 新加坡.C | 中转 | Trojan', type: trojan, server: best.cutecloud.link, port: 52203, password: 20d3bae6-fa82-4caa-899b-ea25f1bce5e0, udp: true, sni: zs.cloud-services.top }
-    - { name: '🇲🇾 马来西亚.A | 中转', type: trojan, server: best.cutecloud.link, port: 52901, password: 20d3bae6-fa82-4caa-899b-ea25f1bce5e0, udp: true, sni: zs.cloud-services.top }
-    - { name: '🇰🇷 韩国.A | 中转 | Trojan', type: trojan, server: fast.cutecloud.link, port: 52301, password: 20d3bae6-fa82-4caa-899b-ea25f1bce5e0, udp: true, sni: zs.cloud-services.top }
-    - { name: '🇷🇺 俄罗斯.A | 中转', type: ss, server: west.cutecloud.link, port: 52911, cipher: chacha20-ietf-poly1305, password: 20d3bae6-fa82-4caa-899b-ea25f1bce5e0, udp: true }
-proxy-groups:
-    - { name: Config_Lu, type: select, proxies: [Woodpecker_noerror, 'Trojan-Singapore', 'Trojan-New Jersey'] }
-    - { name: YouTube, type: select, proxies: [Woodpecker_noerror, 'Trojan-Singapore', 'Trojan-New Jersey'] }
-    - { name: Woodpecker_noerror, type: url-test, proxies: ['🇯🇵 日本.Y | 直连 | Trojan', '🇭🇰 香港.B | 中转 | Trojan', '🇹🇼 台湾.A | 中转 | Trojan', '🇹🇼 台湾.Y | 直连 | Trojan', '🇯🇵 东京.A | 中转 | Trojan', '🇯🇵 东京.B | 中转 | Trojan', '🇯🇵 东京.C | 中转 | Trojan', '🇯🇵 日本.A | 中转 | Trojan', '🇸🇬 新加坡.C | 中转 | Trojan', '🇲🇾 马来西亚.A | 中转', '🇰🇷 韩国.A | 中转 | Trojan', '🇷🇺 俄罗斯.A | 中转'], url: 'http://www.gstatic.com/generate_204', interval: 300 }
-    - { name: FINAL, type: select, proxies: [DIRECT, Woodpecker_noerror, 'Trojan-Singapore', 'Trojan-New Jersey'] }
-rules:
-    # Personal rules
-    - 'DOMAIN-KEYWORD,youtube,YouTube'
 
-    - 'DOMAIN-SUFFIX,services.googleapis.cn,Config_Lu'
-    - 'DOMAIN-SUFFIX,xn--ngstr-lra8j.com,Config_Lu'
-    - 'DOMAIN,safebrowsing.urlsec.qq.com,DIRECT'
-    - 'DOMAIN,safebrowsing.googleapis.com,DIRECT'
-    - 'DOMAIN,developer.apple.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,digicert.com,Config_Lu'
-    - 'DOMAIN,ocsp.apple.com,Config_Lu'
-    - 'DOMAIN,ocsp.comodoca.com,Config_Lu'
-    - 'DOMAIN,ocsp.usertrust.com,Config_Lu'
-    - 'DOMAIN,ocsp.sectigo.com,Config_Lu'
-    - 'DOMAIN,ocsp.verisign.net,Config_Lu'
-    - 'DOMAIN-SUFFIX,apple-dns.net,Config_Lu'
-    - 'DOMAIN,testflight.apple.com,Config_Lu'
-    - 'DOMAIN,sandbox.itunes.apple.com,Config_Lu'
-    - 'DOMAIN,itunes.apple.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,apps.apple.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,blobstore.apple.com,Config_Lu'
-    - 'DOMAIN,cvws.icloud-content.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,mzstatic.com,DIRECT'
-    - 'DOMAIN-SUFFIX,itunes.apple.com,DIRECT'
-    - 'DOMAIN-SUFFIX,icloud.com,DIRECT'
-    - 'DOMAIN-SUFFIX,icloud-content.com,DIRECT'
-    - 'DOMAIN-SUFFIX,me.com,DIRECT'
-    - 'DOMAIN-SUFFIX,aaplimg.com,DIRECT'
-    - 'DOMAIN-SUFFIX,cdn20.com,DIRECT'
-    - 'DOMAIN-SUFFIX,cdn-apple.com,DIRECT'
-    - 'DOMAIN-SUFFIX,akadns.net,DIRECT'
-    - 'DOMAIN-SUFFIX,akamaiedge.net,DIRECT'
-    - 'DOMAIN-SUFFIX,edgekey.net,DIRECT'
-    - 'DOMAIN-SUFFIX,mwcloudcdn.com,DIRECT'
-    - 'DOMAIN-SUFFIX,mwcname.com,DIRECT'
-    - 'DOMAIN-SUFFIX,apple.com,DIRECT'
-    - 'DOMAIN-SUFFIX,apple-cloudkit.com,DIRECT'
-    - 'DOMAIN-SUFFIX,apple-mapkit.com,DIRECT'
-    - 'DOMAIN-SUFFIX,126.com,DIRECT'
-    - 'DOMAIN-SUFFIX,126.net,DIRECT'
-    - 'DOMAIN-SUFFIX,127.net,DIRECT'
-    - 'DOMAIN-SUFFIX,163.com,DIRECT'
-    - 'DOMAIN-SUFFIX,360buyimg.com,DIRECT'
-    - 'DOMAIN-SUFFIX,36kr.com,DIRECT'
-    - 'DOMAIN-SUFFIX,acfun.tv,DIRECT'
-    - 'DOMAIN-SUFFIX,air-matters.com,DIRECT'
-    - 'DOMAIN-SUFFIX,aixifan.com,DIRECT'
-    - 'DOMAIN-KEYWORD,alicdn,DIRECT'
-    - 'DOMAIN-KEYWORD,alipay,DIRECT'
-    - 'DOMAIN-KEYWORD,taobao,DIRECT'
-    - 'DOMAIN-SUFFIX,amap.com,DIRECT'
-    - 'DOMAIN-SUFFIX,autonavi.com,DIRECT'
-    - 'DOMAIN-KEYWORD,baidu,DIRECT'
-    - 'DOMAIN-SUFFIX,bdimg.com,DIRECT'
-    - 'DOMAIN-SUFFIX,bdstatic.com,DIRECT'
-    - 'DOMAIN-SUFFIX,bilibili.com,DIRECT'
-    - 'DOMAIN-SUFFIX,bilivideo.com,DIRECT'
-    - 'DOMAIN-SUFFIX,caiyunapp.com,DIRECT'
-    - 'DOMAIN-SUFFIX,clouddn.com,DIRECT'
-    - 'DOMAIN-SUFFIX,cnbeta.com,DIRECT'
-    - 'DOMAIN-SUFFIX,cnbetacdn.com,DIRECT'
-    - 'DOMAIN-SUFFIX,cootekservice.com,DIRECT'
-    - 'DOMAIN-SUFFIX,csdn.net,DIRECT'
-    - 'DOMAIN-SUFFIX,ctrip.com,DIRECT'
-    - 'DOMAIN-SUFFIX,dgtle.com,DIRECT'
-    - 'DOMAIN-SUFFIX,dianping.com,DIRECT'
-    - 'DOMAIN-SUFFIX,douban.com,DIRECT'
-    - 'DOMAIN-SUFFIX,doubanio.com,DIRECT'
-    - 'DOMAIN-SUFFIX,duokan.com,DIRECT'
-    - 'DOMAIN-SUFFIX,easou.com,DIRECT'
-    - 'DOMAIN-SUFFIX,ele.me,DIRECT'
-    - 'DOMAIN-SUFFIX,feng.com,DIRECT'
-    - 'DOMAIN-SUFFIX,fir.im,DIRECT'
-    - 'DOMAIN-SUFFIX,frdic.com,DIRECT'
-    - 'DOMAIN-SUFFIX,g-cores.com,DIRECT'
-    - 'DOMAIN-SUFFIX,godic.net,DIRECT'
-    - 'DOMAIN-SUFFIX,gtimg.com,DIRECT'
-    - 'DOMAIN,cdn.hockeyapp.net,DIRECT'
-    - 'DOMAIN-SUFFIX,hongxiu.com,DIRECT'
-    - 'DOMAIN-SUFFIX,hxcdn.net,DIRECT'
-    - 'DOMAIN-SUFFIX,iciba.com,DIRECT'
-    - 'DOMAIN-SUFFIX,ifeng.com,DIRECT'
-    - 'DOMAIN-SUFFIX,ifengimg.com,DIRECT'
-    - 'DOMAIN-SUFFIX,ipip.net,DIRECT'
-    - 'DOMAIN-SUFFIX,iqiyi.com,DIRECT'
-    - 'DOMAIN-SUFFIX,jd.com,DIRECT'
-    - 'DOMAIN-SUFFIX,jianshu.com,DIRECT'
-    - 'DOMAIN-SUFFIX,knewone.com,DIRECT'
-    - 'DOMAIN-SUFFIX,le.com,DIRECT'
-    - 'DOMAIN-SUFFIX,lecloud.com,DIRECT'
-    - 'DOMAIN-SUFFIX,lemicp.com,DIRECT'
-    - 'DOMAIN-SUFFIX,licdn.com,DIRECT'
-    - 'DOMAIN-SUFFIX,luoo.net,DIRECT'
-    - 'DOMAIN-SUFFIX,meituan.com,DIRECT'
-    - 'DOMAIN-SUFFIX,meituan.net,DIRECT'
-    - 'DOMAIN-SUFFIX,mi.com,DIRECT'
-    - 'DOMAIN-SUFFIX,miaopai.com,DIRECT'
-    - 'DOMAIN-SUFFIX,microsoft.com,DIRECT'
-    - 'DOMAIN-SUFFIX,microsoftonline.com,DIRECT'
-    - 'DOMAIN-SUFFIX,miui.com,DIRECT'
-    - 'DOMAIN-SUFFIX,miwifi.com,DIRECT'
-    - 'DOMAIN-SUFFIX,mob.com,DIRECT'
-    - 'DOMAIN-SUFFIX,netease.com,DIRECT'
-    - 'DOMAIN-SUFFIX,office.com,DIRECT'
-    - 'DOMAIN-SUFFIX,office365.com,DIRECT'
-    - 'DOMAIN-KEYWORD,officecdn,DIRECT'
-    - 'DOMAIN-SUFFIX,oschina.net,DIRECT'
-    - 'DOMAIN-SUFFIX,ppsimg.com,DIRECT'
-    - 'DOMAIN-SUFFIX,pstatp.com,DIRECT'
-    - 'DOMAIN-SUFFIX,qcloud.com,DIRECT'
-    - 'DOMAIN-SUFFIX,qdaily.com,DIRECT'
-    - 'DOMAIN-SUFFIX,qdmm.com,DIRECT'
-    - 'DOMAIN-SUFFIX,qhimg.com,DIRECT'
-    - 'DOMAIN-SUFFIX,qhres.com,DIRECT'
-    - 'DOMAIN-SUFFIX,qidian.com,DIRECT'
-    - 'DOMAIN-SUFFIX,qihucdn.com,DIRECT'
-    - 'DOMAIN-SUFFIX,qiniu.com,DIRECT'
-    - 'DOMAIN-SUFFIX,qiniucdn.com,DIRECT'
-    - 'DOMAIN-SUFFIX,qiyipic.com,DIRECT'
-    - 'DOMAIN-SUFFIX,qq.com,DIRECT'
-    - 'DOMAIN-SUFFIX,qqurl.com,DIRECT'
-    - 'DOMAIN-SUFFIX,rarbg.to,DIRECT'
-    - 'DOMAIN-SUFFIX,ruguoapp.com,DIRECT'
-    - 'DOMAIN-SUFFIX,segmentfault.com,DIRECT'
-    - 'DOMAIN-SUFFIX,sinaapp.com,DIRECT'
-    - 'DOMAIN-SUFFIX,smzdm.com,DIRECT'
-    - 'DOMAIN-SUFFIX,snapdrop.net,DIRECT'
-    - 'DOMAIN-SUFFIX,sogou.com,DIRECT'
-    - 'DOMAIN-SUFFIX,sogoucdn.com,DIRECT'
-    - 'DOMAIN-SUFFIX,sohu.com,DIRECT'
-    - 'DOMAIN-SUFFIX,soku.com,DIRECT'
-    - 'DOMAIN-SUFFIX,speedtest.net,DIRECT'
-    - 'DOMAIN-SUFFIX,sspai.com,DIRECT'
-    - 'DOMAIN-SUFFIX,suning.com,DIRECT'
-    - 'DOMAIN-SUFFIX,taobao.com,DIRECT'
-    - 'DOMAIN-SUFFIX,tencent.com,DIRECT'
-    - 'DOMAIN-SUFFIX,tenpay.com,DIRECT'
-    - 'DOMAIN-SUFFIX,tianyancha.com,DIRECT'
-    - 'DOMAIN-SUFFIX,tmall.com,DIRECT'
-    - 'DOMAIN-SUFFIX,tudou.com,DIRECT'
-    - 'DOMAIN-SUFFIX,umetrip.com,DIRECT'
-    - 'DOMAIN-SUFFIX,upaiyun.com,DIRECT'
-    - 'DOMAIN-SUFFIX,upyun.com,DIRECT'
-    - 'DOMAIN-SUFFIX,veryzhun.com,DIRECT'
-    - 'DOMAIN-SUFFIX,weather.com,DIRECT'
-    - 'DOMAIN-SUFFIX,weibo.com,DIRECT'
-    - 'DOMAIN-SUFFIX,xiami.com,DIRECT'
-    - 'DOMAIN-SUFFIX,xiami.net,DIRECT'
-    - 'DOMAIN-SUFFIX,xiaomicp.com,DIRECT'
-    - 'DOMAIN-SUFFIX,ximalaya.com,DIRECT'
-    - 'DOMAIN-SUFFIX,xmcdn.com,DIRECT'
-    - 'DOMAIN-SUFFIX,xunlei.com,DIRECT'
-    - 'DOMAIN-SUFFIX,yhd.com,DIRECT'
-    - 'DOMAIN-SUFFIX,yihaodianimg.com,DIRECT'
-    - 'DOMAIN-SUFFIX,yinxiang.com,DIRECT'
-    - 'DOMAIN-SUFFIX,ykimg.com,DIRECT'
-    - 'DOMAIN-SUFFIX,youdao.com,DIRECT'
-    - 'DOMAIN-SUFFIX,youku.com,DIRECT'
-    - 'DOMAIN-SUFFIX,zealer.com,DIRECT'
-    - 'DOMAIN-SUFFIX,zhihu.com,DIRECT'
-    - 'DOMAIN-SUFFIX,zhimg.com,DIRECT'
-    - 'DOMAIN-SUFFIX,zimuzu.tv,DIRECT'
-    - 'DOMAIN-SUFFIX,zoho.com,DIRECT'
-    - 'DOMAIN-KEYWORD,amazon,Config_Lu'
-    - 'DOMAIN-KEYWORD,google,Config_Lu'
-    - 'DOMAIN-KEYWORD,gmail,Config_Lu'
-    - 'DOMAIN-KEYWORD,facebook,Config_Lu'
-    - 'DOMAIN-SUFFIX,fb.me,Config_Lu'
-    - 'DOMAIN-SUFFIX,fbcdn.net,Config_Lu'
-    - 'DOMAIN-KEYWORD,twitter,Config_Lu'
-    - 'DOMAIN-KEYWORD,instagram,Config_Lu'
-    - 'DOMAIN-KEYWORD,dropbox,Config_Lu'
-    - 'DOMAIN-SUFFIX,twimg.com,Config_Lu'
-    - 'DOMAIN-KEYWORD,blogspot,Config_Lu'
-    - 'DOMAIN-SUFFIX,youtu.be,Config_Lu'
-    - 'DOMAIN-KEYWORD,whatsapp,Config_Lu'
-    - 'DOMAIN-KEYWORD,admarvel,REJECT'
-    - 'DOMAIN-KEYWORD,admaster,REJECT'
-    - 'DOMAIN-KEYWORD,adsage,REJECT'
-    - 'DOMAIN-KEYWORD,adsmogo,REJECT'
-    - 'DOMAIN-KEYWORD,adsrvmedia,REJECT'
-    - 'DOMAIN-KEYWORD,adwords,REJECT'
-    - 'DOMAIN-KEYWORD,adservice,REJECT'
-    - 'DOMAIN-SUFFIX,appsflyer.com,REJECT'
-    - 'DOMAIN-KEYWORD,domob,REJECT'
-    - 'DOMAIN-SUFFIX,doubleclick.net,REJECT'
-    - 'DOMAIN-KEYWORD,duomeng,REJECT'
-    - 'DOMAIN-KEYWORD,dwtrack,REJECT'
-    - 'DOMAIN-KEYWORD,guanggao,REJECT'
-    - 'DOMAIN-KEYWORD,lianmeng,REJECT'
-    - 'DOMAIN-SUFFIX,mmstat.com,REJECT'
-    - 'DOMAIN-KEYWORD,mopub,REJECT'
-    - 'DOMAIN-KEYWORD,omgmta,REJECT'
-    - 'DOMAIN-KEYWORD,openx,REJECT'
-    - 'DOMAIN-KEYWORD,partnerad,REJECT'
-    - 'DOMAIN-KEYWORD,pingfore,REJECT'
-    - 'DOMAIN-KEYWORD,supersonicads,REJECT'
-    - 'DOMAIN-KEYWORD,uedas,REJECT'
-    - 'DOMAIN-KEYWORD,umeng,REJECT'
-    - 'DOMAIN-KEYWORD,usage,REJECT'
-    - 'DOMAIN-SUFFIX,vungle.com,REJECT'
-    - 'DOMAIN-KEYWORD,wlmonitor,REJECT'
-    - 'DOMAIN-KEYWORD,zjtoolbar,REJECT'
-    - 'DOMAIN-SUFFIX,9to5mac.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,abpchina.org,Config_Lu'
-    - 'DOMAIN-SUFFIX,adblockplus.org,Config_Lu'
-    - 'DOMAIN-SUFFIX,adobe.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,akamaized.net,Config_Lu'
-    - 'DOMAIN-SUFFIX,alfredapp.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,amplitude.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,ampproject.org,Config_Lu'
-    - 'DOMAIN-SUFFIX,android.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,angularjs.org,Config_Lu'
-    - 'DOMAIN-SUFFIX,aolcdn.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,apkpure.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,appledaily.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,appshopper.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,appspot.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,arcgis.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,archive.org,Config_Lu'
-    - 'DOMAIN-SUFFIX,armorgames.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,aspnetcdn.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,att.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,awsstatic.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,azureedge.net,Config_Lu'
-    - 'DOMAIN-SUFFIX,azurewebsites.net,Config_Lu'
-    - 'DOMAIN-SUFFIX,bing.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,bintray.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,bit.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,bit.ly,Config_Lu'
-    - 'DOMAIN-SUFFIX,bitbucket.org,Config_Lu'
-    - 'DOMAIN-SUFFIX,bjango.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,bkrtx.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,blog.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,blogcdn.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,blogger.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,blogsmithmedia.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,blogspot.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,blogspot.hk,Config_Lu'
-    - 'DOMAIN-SUFFIX,bloomberg.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,box.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,box.net,Config_Lu'
-    - 'DOMAIN-SUFFIX,cachefly.net,Config_Lu'
-    - 'DOMAIN-SUFFIX,chromium.org,Config_Lu'
-    - 'DOMAIN-SUFFIX,cl.ly,Config_Lu'
-    - 'DOMAIN-SUFFIX,cloudflare.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,cloudfront.net,Config_Lu'
-    - 'DOMAIN-SUFFIX,cloudmagic.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,cmail19.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,cnet.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,cocoapods.org,Config_Lu'
-    - 'DOMAIN-SUFFIX,comodoca.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,crashlytics.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,culturedcode.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,d.pr,Config_Lu'
-    - 'DOMAIN-SUFFIX,danilo.to,Config_Lu'
-    - 'DOMAIN-SUFFIX,dayone.me,Config_Lu'
-    - 'DOMAIN-SUFFIX,db.tt,Config_Lu'
-    - 'DOMAIN-SUFFIX,deskconnect.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,disq.us,Config_Lu'
-    - 'DOMAIN-SUFFIX,disqus.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,disquscdn.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,dnsimple.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,docker.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,dribbble.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,droplr.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,duckduckgo.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,dueapp.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,dytt8.net,Config_Lu'
-    - 'DOMAIN-SUFFIX,edgecastcdn.net,Config_Lu'
-    - 'DOMAIN-SUFFIX,edgekey.net,Config_Lu'
-    - 'DOMAIN-SUFFIX,edgesuite.net,Config_Lu'
-    - 'DOMAIN-SUFFIX,engadget.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,entrust.net,Config_Lu'
-    - 'DOMAIN-SUFFIX,eurekavpt.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,evernote.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,fabric.io,Config_Lu'
-    - 'DOMAIN-SUFFIX,fast.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,fastly.net,Config_Lu'
-    - 'DOMAIN-SUFFIX,fc2.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,feedburner.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,feedly.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,feedsportal.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,fiftythree.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,firebaseio.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,flexibits.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,flickr.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,flipboard.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,g.co,Config_Lu'
-    - 'DOMAIN-SUFFIX,gabia.net,Config_Lu'
-    - 'DOMAIN-SUFFIX,geni.us,Config_Lu'
-    - 'DOMAIN-SUFFIX,gfx.ms,Config_Lu'
-    - 'DOMAIN-SUFFIX,ggpht.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,ghostnoteapp.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,git.io,Config_Lu'
-    - 'DOMAIN-KEYWORD,github,Config_Lu'
-    - 'DOMAIN-SUFFIX,globalsign.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,gmodules.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,godaddy.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,golang.org,Config_Lu'
-    - 'DOMAIN-SUFFIX,gongm.in,Config_Lu'
-    - 'DOMAIN-SUFFIX,goo.gl,Config_Lu'
-    - 'DOMAIN-SUFFIX,goodreaders.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,goodreads.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,gravatar.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,gstatic.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,gvt0.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,hockeyapp.net,Config_Lu'
-    - 'DOMAIN-SUFFIX,hotmail.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,icons8.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,ifixit.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,ift.tt,Config_Lu'
-    - 'DOMAIN-SUFFIX,ifttt.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,iherb.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,imageshack.us,Config_Lu'
-    - 'DOMAIN-SUFFIX,img.ly,Config_Lu'
-    - 'DOMAIN-SUFFIX,imgur.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,imore.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,instapaper.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,ipn.li,Config_Lu'
-    - 'DOMAIN-SUFFIX,is.gd,Config_Lu'
-    - 'DOMAIN-SUFFIX,issuu.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,itgonglun.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,itun.es,Config_Lu'
-    - 'DOMAIN-SUFFIX,ixquick.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,j.mp,Config_Lu'
-    - 'DOMAIN-SUFFIX,js.revsci.net,Config_Lu'
-    - 'DOMAIN-SUFFIX,jshint.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,jtvnw.net,Config_Lu'
-    - 'DOMAIN-SUFFIX,justgetflux.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,kat.cr,Config_Lu'
-    - 'DOMAIN-SUFFIX,klip.me,Config_Lu'
-    - 'DOMAIN-SUFFIX,libsyn.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,linkedin.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,line-apps.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,linode.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,lithium.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,littlehj.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,live.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,live.net,Config_Lu'
-    - 'DOMAIN-SUFFIX,livefilestore.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,llnwd.net,Config_Lu'
-    - 'DOMAIN-SUFFIX,macid.co,Config_Lu'
-    - 'DOMAIN-SUFFIX,macromedia.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,macrumors.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,mashable.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,mathjax.org,Config_Lu'
-    - 'DOMAIN-SUFFIX,medium.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,mega.co.nz,Config_Lu'
-    - 'DOMAIN-SUFFIX,mega.nz,Config_Lu'
-    - 'DOMAIN-SUFFIX,megaupload.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,microsofttranslator.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,mindnode.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,mobile01.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,modmyi.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,msedge.net,Config_Lu'
-    - 'DOMAIN-SUFFIX,myfontastic.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,name.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,nextmedia.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,nsstatic.net,Config_Lu'
-    - 'DOMAIN-SUFFIX,nssurge.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,nyt.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,nytimes.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,omnigroup.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,onedrive.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,onenote.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,ooyala.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,openvpn.net,Config_Lu'
-    - 'DOMAIN-SUFFIX,openwrt.org,Config_Lu'
-    - 'DOMAIN-SUFFIX,orkut.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,osxdaily.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,outlook.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,ow.ly,Config_Lu'
-    - 'DOMAIN-SUFFIX,paddleapi.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,parallels.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,parse.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,pdfexpert.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,periscope.tv,Config_Lu'
-    - 'DOMAIN-SUFFIX,pinboard.in,Config_Lu'
-    - 'DOMAIN-SUFFIX,pinterest.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,pixelmator.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,pixiv.net,Config_Lu'
-    - 'DOMAIN-SUFFIX,playpcesor.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,playstation.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,playstation.com.hk,Config_Lu'
-    - 'DOMAIN-SUFFIX,playstation.net,Config_Lu'
-    - 'DOMAIN-SUFFIX,playstationnetwork.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,pushwoosh.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,rime.im,Config_Lu'
-    - 'DOMAIN-SUFFIX,servebom.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,sfx.ms,Config_Lu'
-    - 'DOMAIN-SUFFIX,shadowsocks.org,Config_Lu'
-    - 'DOMAIN-SUFFIX,sharethis.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,shazam.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,skype.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,smartdnsConfig_Lu.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,smartmailcloud.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,sndcdn.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,sony.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,soundcloud.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,sourceforge.net,Config_Lu'
-    - 'DOMAIN-SUFFIX,spotify.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,squarespace.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,sstatic.net,Config_Lu'
-    - 'DOMAIN-SUFFIX,st.luluku.pw,Config_Lu'
-    - 'DOMAIN-SUFFIX,stackoverflow.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,startpage.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,staticflickr.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,steamcommunity.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,symauth.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,symcb.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,symcd.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,tapbots.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,tapbots.net,Config_Lu'
-    - 'DOMAIN-SUFFIX,tdesktop.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,techcrunch.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,techsmith.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,thepiratebay.org,Config_Lu'
-    - 'DOMAIN-SUFFIX,theverge.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,time.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,timeinc.net,Config_Lu'
-    - 'DOMAIN-SUFFIX,tiny.cc,Config_Lu'
-    - 'DOMAIN-SUFFIX,tinypic.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,tmblr.co,Config_Lu'
-    - 'DOMAIN-SUFFIX,todoist.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,trello.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,trustasiassl.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,tumblr.co,Config_Lu'
-    - 'DOMAIN-SUFFIX,tumblr.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,tweetdeck.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,tweetmarker.net,Config_Lu'
-    - 'DOMAIN-SUFFIX,twitch.tv,Config_Lu'
-    - 'DOMAIN-SUFFIX,txmblr.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,typekit.net,Config_Lu'
-    - 'DOMAIN-SUFFIX,ubertags.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,ublock.org,Config_Lu'
-    - 'DOMAIN-SUFFIX,ubnt.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,ulyssesapp.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,urchin.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,usertrust.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,v.gd,Config_Lu'
-    - 'DOMAIN-SUFFIX,v2ex.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,vimeo.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,vimeocdn.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,vine.co,Config_Lu'
-    - 'DOMAIN-SUFFIX,vivaldi.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,vox-cdn.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,vsco.co,Config_Lu'
-    - 'DOMAIN-SUFFIX,vultr.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,w.org,Config_Lu'
-    - 'DOMAIN-SUFFIX,w3schools.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,webtype.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,wikiwand.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,wikileaks.org,Config_Lu'
-    - 'DOMAIN-SUFFIX,wikimedia.org,Config_Lu'
-    - 'DOMAIN-SUFFIX,wikipedia.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,wikipedia.org,Config_Lu'
-    - 'DOMAIN-SUFFIX,windows.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,windows.net,Config_Lu'
-    - 'DOMAIN-SUFFIX,wire.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,wordpress.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,workflowy.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,wp.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,wsj.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,wsj.net,Config_Lu'
-    - 'DOMAIN-SUFFIX,xda-developers.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,xeeno.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,xiti.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,yahoo.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,yimg.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,ying.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,yoyo.org,Config_Lu'
-    - 'DOMAIN-SUFFIX,ytimg.com,Config_Lu'
-    - 'DOMAIN-SUFFIX,telegra.ph,Config_Lu'
-    - 'DOMAIN-SUFFIX,telegram.org,Config_Lu'
-    - 'IP-CIDR,91.108.4.0/22,Config_Lu,no-resolve'
-    - 'IP-CIDR,91.108.8.0/21,Config_Lu,no-resolve'
-    - 'IP-CIDR,91.108.16.0/22,Config_Lu,no-resolve'
-    - 'IP-CIDR,91.108.56.0/22,Config_Lu,no-resolve'
-    - 'IP-CIDR,149.154.160.0/20,Config_Lu,no-resolve'
-    - 'IP-CIDR6,2001:67c:4e8::/48,Config_Lu,no-resolve'
-    - 'IP-CIDR6,2001:b28:f23d::/48,Config_Lu,no-resolve'
-    - 'IP-CIDR6,2001:b28:f23f::/48,Config_Lu,no-resolve'
-    - 'IP-CIDR,120.232.181.162/32,Config_Lu,no-resolve'
-    - 'IP-CIDR,120.241.147.226/32,Config_Lu,no-resolve'
-    - 'IP-CIDR,120.253.253.226/32,Config_Lu,no-resolve'
-    - 'IP-CIDR,120.253.255.162/32,Config_Lu,no-resolve'
-    - 'IP-CIDR,120.253.255.34/32,Config_Lu,no-resolve'
-    - 'IP-CIDR,120.253.255.98/32,Config_Lu,no-resolve'
-    - 'IP-CIDR,180.163.150.162/32,Config_Lu,no-resolve'
-    - 'IP-CIDR,180.163.150.34/32,Config_Lu,no-resolve'
-    - 'IP-CIDR,180.163.151.162/32,Config_Lu,no-resolve'
-    - 'IP-CIDR,180.163.151.34/32,Config_Lu,no-resolve'
-    - 'IP-CIDR,203.208.39.0/24,Config_Lu,no-resolve'
-    - 'IP-CIDR,203.208.40.0/24,Config_Lu,no-resolve'
-    - 'IP-CIDR,203.208.41.0/24,Config_Lu,no-resolve'
-    - 'IP-CIDR,203.208.43.0/24,Config_Lu,no-resolve'
-    - 'IP-CIDR,203.208.50.0/24,Config_Lu,no-resolve'
-    - 'IP-CIDR,220.181.174.162/32,Config_Lu,no-resolve'
-    - 'IP-CIDR,220.181.174.226/32,Config_Lu,no-resolve'
-    - 'IP-CIDR,220.181.174.34/32,Config_Lu,no-resolve'
-    - 'DOMAIN,injections.adguard.org,DIRECT'
-    - 'DOMAIN,local.adguard.org,DIRECT'
-    - 'DOMAIN-SUFFIX,local,DIRECT'
-    - 'IP-CIDR,127.0.0.0/8,DIRECT'
-    - 'IP-CIDR,172.16.0.0/12,DIRECT'
-    - 'IP-CIDR,192.168.0.0/16,DIRECT'
-    - 'IP-CIDR,10.0.0.0/8,DIRECT'
-    - 'IP-CIDR,17.0.0.0/8,DIRECT'
-    - 'IP-CIDR,100.64.0.0/10,DIRECT'
-    - 'IP-CIDR,224.0.0.0/4,DIRECT'
-    - 'IP-CIDR6,fe80::/10,DIRECT'
-    - 'DOMAIN-SUFFIX,cn,DIRECT'
-    - 'DOMAIN-KEYWORD,-cn,DIRECT'
-    - 'GEOIP,CN,DIRECT'
-    - 'MATCH,FINAL'
+# 设置为 true 以允许来自其他 LAN IP 地址的连接
+allow-lan: true
+
+# 仅当 `allow-lan` 为 `true` 时有效
+# '*': 绑定所有 IP 地址
+bind-address: '*'
+
+# Clash 路由工作模式
+mode: rule
+
+# 默认情况下, Clash 将日志打印到 STDOUT
+# 日志级别: info / warning / error / debug / silent
+log-level: debug
+
+# 当设置为 false 时, 解析器不会将主机名解析为 IPv6 地址
+ipv6: false
+
+# RESTful Web API 监听地址
+external-controller: 127.0.0.1:9090
+
+# DNS 服务设置
+# 此部分是可选的. 当不存在时, DNS 服务将被禁用.
+dns:
+  enable: true
+  listen: 0.0.0.0:53
+  ipv6: false # 当为 false 时, AAAA 查询的响应将为空
+
+  # 这些 名称服务器(nameservers) 用于解析下列 DNS 名称服务器主机名.
+  # 仅指定 IP 地址
+  default-nameserver: [223.5.5.5, 119.29.29.29]
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16 # Fake IP 地址池 CIDR
+  use-hosts: true # 查找 hosts 并返回 IP 记录
+  nameserver: ['https://doh.pub/dns-query', 'https://dns.alidns.com/dns-query']
+  fallback: ['https://doh.dns.sb/dns-query', 'https://dns.cloudflare.com/dns-query', 'https://dns.twnic.tw/dns-query', 'tls://8.8.4.4:853']
+  fallback-filter: { geoip: true, ipcidr: [240.0.0.0/4, 0.0.0.0/32] }
+
+
+proxies:
+  - { name: 'Trojan-Singapore', type: trojan, server: tg.luwangxinqi.me, port: 443, password: vaGXL3J9Oljuc7rX, udp: true, sni: tg.luwangxinqi.me }
+  - { name: 'Trojan-New Jersey', type: trojan, server: tg.stephenlu.cc, port: 443, password: tlqaVjwvZo8Ed2iI, udp: true, sni: tg.stephenlu.cc }
+  - { name: '日本.Y', type: trojan, server: jpy.cloud-services.top, port: 443, password: 20d3bae6-fa82-4caa-899b-ea25f1bce5e0, udp: true, sni: zs.cloud-services.top }
+  - { name: '香港.B', type: trojan, server: east.cutecloud.link, port: 52002, password: 20d3bae6-fa82-4caa-899b-ea25f1bce5e0, udp: true, sni: zs.cloud-services.top }
+  - { name: '台湾.A', type: trojan, server: best.cutecloud.link, port: 52924, password: 20d3bae6-fa82-4caa-899b-ea25f1bce5e0, udp: true, sni: zs.cloud-services.top }
+  - { name: '台湾.Y', type: trojan, server: twy.cloud-services.top, port: 443, password: 20d3bae6-fa82-4caa-899b-ea25f1bce5e0, udp: true, sni: zs.cloud-services.top }
+  - { name: '东京.A', type: trojan, server: fast.cutecloud.link, port: 52101, password: 20d3bae6-fa82-4caa-899b-ea25f1bce5e0, udp: true, sni: zs.cloud-services.top }
+  - { name: '东京.B', type: trojan, server: fast.cutecloud.link, port: 52102, password: 20d3bae6-fa82-4caa-899b-ea25f1bce5e0, udp: true, sni: zs.cloud-services.top }
+  - { name: '东京.C', type: trojan, server: fast.cutecloud.link, port: 52103, password: 20d3bae6-fa82-4caa-899b-ea25f1bce5e0, udp: true, sni: zs.cloud-services.top }
+  - { name: '日本.A', type: trojan, server: fast.cutecloud.link, port: 52111, password: 20d3bae6-fa82-4caa-899b-ea25f1bce5e0, udp: true, sni: zs.cloud-services.top }
+  - { name: '新加坡.C', type: trojan, server: best.cutecloud.link, port: 52203, password: 20d3bae6-fa82-4caa-899b-ea25f1bce5e0, udp: true, sni: zs.cloud-services.top }
+  - { name: '马来西亚.A', type: trojan, server: best.cutecloud.link, port: 52901, password: 20d3bae6-fa82-4caa-899b-ea25f1bce5e0, udp: true, sni: zs.cloud-services.top }
+  - { name: '韩国.A', type: trojan, server: fast.cutecloud.link, port: 52301, password: 20d3bae6-fa82-4caa-899b-ea25f1bce5e0, udp: true, sni: zs.cloud-services.top }
+  - { name: '俄罗斯.A', type: ss, server: west.cutecloud.link, port: 52911, cipher: chacha20-ietf-poly1305, password: 20d3bae6-fa82-4caa-899b-ea25f1bce5e0, udp: true }
+
+Config_Lu-groups:
+  - { name: Config_Lu, type: select, proxies: [Woodpecker_noerror, 'Trojan-Singapore', 'Trojan-New Jersey'] }
+  - { name: FINAL, type: select, proxies: [DIRECT, Woodpecker_noerror, 'Trojan-Singapore', 'Trojan-New Jersey'] }
+  - { name: Woodpecker_noerror, type: url-test, proxies: ['日本.Y', '香港.B', '台湾.A', '台湾.Y', '东京.A', '东京.B', '东京.C', '日本.A', '新加坡.C', '马来西亚.A', '韩国.A', '俄罗斯.A'], url: 'http://www.gstatic.com/generate_204', interval: 300 }
+  # Apple 服务代理
+  # - { name: "Apple", type: select, proxies: [DIRECT, "Trojan-Singapore", "ZuiMY"]}
+
+# 规则
+rules:
+
+  # > Personal Use
+  # > Personal Use(for app)
+  - PROCESS-NAME,com.woodpecker.wwatch,Woodpecker_noerror
+  - PROCESS-NAME,com.fehorizon.feportal,DIRECT
+  - PROCESS-NAME,hello.litiaotiao.app,REJECT
+  # > Personal Use(for website)
+  - DOMAIN-SUFFIX,vultr.com,DIRECT
+  # > ChatGPT
+  - DOMAIN-SUFFIX,chatgpt.com,Config_Lu
+  - DOMAIN-SUFFIX,openai.com,Config_Lu
+
+  # 广告屏蔽
+  # Google 广告
+  - DOMAIN-SUFFIX,adservice.google.com,REJECT
+  - DOMAIN-SUFFIX,pagead2.googlesyndication.com,REJECT
+  - DOMAIN-SUFFIX,googleads.g.doubleclick.net,REJECT
+  - DOMAIN-SUFFIX,ad.doubleclick.net,REJECT
+  # YouTube 广告
+  - DOMAIN-SUFFIX,s.youtube.com,REJECT
+  - DOMAIN-SUFFIX,video-stats.video.google.com,REJECT
+  # Facebook 广告
+  - DOMAIN-SUFFIX,ads.facebook.com,REJECT
+  - DOMAIN-SUFFIX,connect.facebook.net,REJECT
+  # Yahoo/Bing 广告
+  - DOMAIN-SUFFIX,ads.yahoo.com,REJECT
+  - DOMAIN-SUFFIX,bingads.microsoft.com,REJECT
+  # 亚马逊广告
+  - DOMAIN-SUFFIX,c.amazon-adsystem.com,REJECT
+  - DOMAIN-SUFFIX,mads.amazon-adsystem.com,REJECT
+  # 其他常见广告平台
+  - DOMAIN-SUFFIX,ad.yieldlab.net,REJECT
+  - DOMAIN-SUFFIX,track.adform.net,REJECT
+  - DOMAIN-SUFFIX,ib.adnxs.com,REJECT
+  - DOMAIN-SUFFIX,admixer.net,REJECT
+  - DOMAIN-SUFFIX,adserver.me,REJECT
+  - DOMAIN-SUFFIX,adsafeprotected.com,REJECT
+  - DOMAIN-SUFFIX,doubleclick.net,REJECT
+  - DOMAIN-SUFFIX,adroll.com,REJECT
+  - DOMAIN-SUFFIX,ad.360yield.com,REJECT
+  - DOMAIN-SUFFIX,appsflyer.com,REJECT
+  - DOMAIN-SUFFIX,taboola.com,REJECT
+  - DOMAIN-SUFFIX,adobe.demdex.net,REJECT
+  # 广告分析服务
+  - DOMAIN-SUFFIX,google-analytics.com,REJECT
+  - DOMAIN-SUFFIX,analytics.yahoo.com,REJECT
+  - DOMAIN-SUFFIX,ads-twitter.com,REJECT
+  - DOMAIN-SUFFIX,pixel.facebook.com,REJECT
+  - DOMAIN-SUFFIX,cdn.adsafeprotected.com,REJECT
+
+  # Unbreak
+  # > Google
+  - DOMAIN-SUFFIX,googletraveladservices.com,DIRECT
+  - DOMAIN,dl.google.com,DIRECT
+  - DOMAIN,mtalk.google.com,DIRECT
+  # Global Area Network
+  # (Config_Lu)
+  # (Music)
+  # > Deezer
+  # USER-AGENT,Deezer*,Config_Lu
+  - DOMAIN-SUFFIX,deezer.com,Config_Lu
+  - DOMAIN-SUFFIX,dzcdn.net,Config_Lu
+  # > KKBOX
+  - DOMAIN-SUFFIX,kkbox.com,Config_Lu
+  - DOMAIN-SUFFIX,kkbox.com.tw,Config_Lu
+  - DOMAIN-SUFFIX,kfs.io,Config_Lu
+  # > JOOX
+  # USER-AGENT,WeMusic*,Config_Lu
+  # USER-AGENT,JOOX*,Config_Lu
+  - DOMAIN-SUFFIX,joox.com,Config_Lu
+  # > Pandora
+  # USER-AGENT,Pandora*,Config_Lu
+  - DOMAIN-SUFFIX,pandora.com,Config_Lu
+  # > SoundCloud
+  # USER-AGENT,SoundCloud*,Config_Lu
+  - DOMAIN-SUFFIX,p-cdn.us,Config_Lu
+  - DOMAIN-SUFFIX,sndcdn.com,Config_Lu
+  - DOMAIN-SUFFIX,soundcloud.com,Config_Lu
+  # > Spotify
+  # USER-AGENT,Spotify*,Config_Lu
+  - DOMAIN-SUFFIX,pscdn.co,Config_Lu
+  - DOMAIN-SUFFIX,scdn.co,Config_Lu
+  - DOMAIN-SUFFIX,spotify.com,Config_Lu
+  - DOMAIN-SUFFIX,spoti.fi,Config_Lu
+  - DOMAIN-KEYWORD,spotify.com,Config_Lu
+  - DOMAIN-KEYWORD,-spotify-com,Config_Lu
+  # > TIDAL
+  # USER-AGENT,TIDAL*,Config_Lu
+  - DOMAIN-SUFFIX,tidal.com,Config_Lu
+  # > YouTubeMusic
+  # USER-AGENT,com.google.ios.youtubemusic*,Config_Lu
+  # USER-AGENT,YouTubeMusic*,Config_Lu
+  # (Video)
+  # > All4
+  # USER-AGENT,All4*,Config_Lu
+  - DOMAIN-SUFFIX,c4assets.com,Config_Lu
+  - DOMAIN-SUFFIX,channel4.com,Config_Lu
+  # > AbemaTV
+  # USER-AGENT,AbemaTV*,Config_Lu
+  - DOMAIN-SUFFIX,abema.io,Config_Lu
+  - DOMAIN-SUFFIX,ameba.jp,Config_Lu
+  - DOMAIN-SUFFIX,abema.tv,Config_Lu
+  - DOMAIN-SUFFIX,hayabusa.io,Config_Lu
+  - DOMAIN,abematv.akamaized.net,Config_Lu
+  - DOMAIN,ds-linear-abematv.akamaized.net,Config_Lu
+  - DOMAIN,ds-vod-abematv.akamaized.net,Config_Lu
+  - DOMAIN,linear-abematv.akamaized.net,Config_Lu
+  # > Amazon Prime Video
+  # USER-AGENT,InstantVideo.US*,Config_Lu
+  # USER-AGENT,Prime%20Video*,Config_Lu
+  - DOMAIN-SUFFIX,aiv-cdn.net,Config_Lu
+  - DOMAIN-SUFFIX,aiv-delivery.net,Config_Lu
+  - DOMAIN-SUFFIX,amazonvideo.com,Config_Lu
+  - DOMAIN-SUFFIX,primevideo.com,Config_Lu
+  - DOMAIN,avodmp4s3ww-a.akamaihd.net,Config_Lu
+  - DOMAIN,d25xi40x97liuc.cloudfront.net,Config_Lu
+  - DOMAIN,dmqdd6hw24ucf.cloudfront.net,Config_Lu
+  - DOMAIN,d22qjgkvxw22r6.cloudfront.net,Config_Lu
+  - DOMAIN,d1v5ir2lpwr8os.cloudfront.net,Config_Lu
+  - DOMAIN-KEYWORD,avoddashs,Config_Lu
+  # > Bahamut
+  # USER-AGENT,Anime*,Config_Lu
+  - DOMAIN-SUFFIX,bahamut.com.tw,Config_Lu
+  - DOMAIN-SUFFIX,gamer.com.tw,Config_Lu
+  - DOMAIN,gamer-cds.cdn.hinet.net,Config_Lu
+  - DOMAIN,gamer2-cds.cdn.hinet.net,Config_Lu
+  # > BBC iPlayer
+  # USER-AGENT,BBCiPlayer*,Config_Lu
+  - DOMAIN-SUFFIX,bbc.co.uk,Config_Lu
+  - DOMAIN-SUFFIX,bbci.co.uk,Config_Lu
+  - DOMAIN-KEYWORD,bbcfmt,Config_Lu
+  - DOMAIN-KEYWORD,uk-live,Config_Lu
+  # > DAZN
+  # USER-AGENT,DAZN*,Config_Lu
+  - DOMAIN-SUFFIX,dazn.com,Config_Lu
+  - DOMAIN-SUFFIX,dazn-api.com,Config_Lu
+  - DOMAIN,d151l6v8er5bdm.cloudfront.net,Config_Lu
+  - DOMAIN-KEYWORD,voddazn,Config_Lu
+  # > Disney+
+  # USER-AGENT,Disney+*,Config_Lu
+  - DOMAIN-SUFFIX,bamgrid.com,Config_Lu
+  - DOMAIN-SUFFIX,disney-plus.net,Config_Lu
+  - DOMAIN-SUFFIX,disneyplus.com,Config_Lu
+  - DOMAIN-SUFFIX,dssott.com,Config_Lu
+  - DOMAIN,cdn.registerdisney.go.com,Config_Lu
+  # > encoreTVB
+  # USER-AGENT,encoreTVB*,Config_Lu
+  - DOMAIN-SUFFIX,encoretvb.com,Config_Lu
+  - DOMAIN,edge.api.brightcove.com,Config_Lu
+  - DOMAIN,bcbolt446c5271-a.akamaihd.net,Config_Lu
+  # > FOX NOW
+  # USER-AGENT,FOX%20NOW*,Config_Lu
+  - DOMAIN-SUFFIX,fox.com,Config_Lu
+  - DOMAIN-SUFFIX,foxdcg.com,Config_Lu
+  - DOMAIN-SUFFIX,theplatform.com,Config_Lu
+  - DOMAIN-SUFFIX,uplynk.com,Config_Lu
+  # > HBO NOW
+  # USER-AGENT,HBO%20NOW*,Config_Lu
+  - DOMAIN-SUFFIX,hbo.com,Config_Lu
+  - DOMAIN-SUFFIX,hbogo.com,Config_Lu
+  - DOMAIN-SUFFIX,hbonow.com,Config_Lu
+  # > HBO GO HKG
+  # USER-AGENT,HBO%20GO%20PROD%20HKG*,Config_Lu
+  - DOMAIN-SUFFIX,hbogoasia.com,Config_Lu
+  - DOMAIN-SUFFIX,hbogoasia.hk,Config_Lu
+  - DOMAIN,bcbolthboa-a.akamaihd.net,Config_Lu
+  - DOMAIN,players.brightcove.net,Config_Lu
+  - DOMAIN,s3-ap-southeast-1.amazonaws.com,Config_Lu
+  - DOMAIN,dai3fd1oh325y.cloudfront.net,Config_Lu
+  - DOMAIN,44wilhpljf.execute-api.ap-southeast-1.amazonaws.com,Config_Lu
+  - DOMAIN,hboasia1-i.akamaihd.net,Config_Lu
+  - DOMAIN,hboasia2-i.akamaihd.net,Config_Lu
+  - DOMAIN,hboasia3-i.akamaihd.net,Config_Lu
+  - DOMAIN,hboasia4-i.akamaihd.net,Config_Lu
+  - DOMAIN,hboasia5-i.akamaihd.net,Config_Lu
+  - DOMAIN,cf-images.ap-southeast-1.prod.boltdns.net,Config_Lu
+  # > 华文电视
+  # USER-AGENT,HWTVMobile*,Config_Lu
+  - DOMAIN-SUFFIX,5itv.tv,Config_Lu
+  - DOMAIN-SUFFIX,ocnttv.com,Config_Lu
+  # > Hulu
+  - DOMAIN-SUFFIX,hulu.com,Config_Lu
+  - DOMAIN-SUFFIX,huluim.com,Config_Lu
+  - DOMAIN-SUFFIX,hulustream.com,Config_Lu
+  # > Hulu(フールー)
+  - DOMAIN-SUFFIX,happyon.jp,Config_Lu
+  - DOMAIN-SUFFIX,hulu.jp,Config_Lu
+  # > ITV
+  # USER-AGENT,ITV_Player*,Config_Lu
+  - DOMAIN-SUFFIX,itv.com,Config_Lu
+  - DOMAIN-SUFFIX,itvstatic.com,Config_Lu
+  - DOMAIN,itvpnpmobile-a.akamaihd.net,Config_Lu
+  # > KKTV
+  # USER-AGENT,KKTV*,Config_Lu
+  # USER-AGENT,com.kktv.ios.kktv*,Config_Lu
+  - DOMAIN-SUFFIX,kktv.com.tw,Config_Lu
+  - DOMAIN-SUFFIX,kktv.me,Config_Lu
+  - DOMAIN,kktv-theater.kk.stream,Config_Lu
+  # > Line TV
+  # USER-AGENT,LINE%20TV*,Config_Lu
+  - DOMAIN-SUFFIX,linetv.tw,Config_Lu
+  - DOMAIN,d3c7rimkq79yfu.cloudfront.net,Config_Lu
+  # > LiTV
+  - DOMAIN-SUFFIX,litv.tv,Config_Lu
+  - DOMAIN,litvfreemobile-hichannel.cdn.hinet.net,Config_Lu
+  # > My5
+  # USER-AGENT,My5*,Config_Lu
+  - DOMAIN-SUFFIX,channel5.com,Config_Lu
+  - DOMAIN-SUFFIX,my5.tv,Config_Lu
+  - DOMAIN,d349g9zuie06uo.cloudfront.net,Config_Lu
+  # > myTV SUPER
+  # USER-AGENT,mytv*,Config_Lu
+  - DOMAIN-SUFFIX,mytvsuper.com,Config_Lu
+  - DOMAIN-SUFFIX,tvb.com,Config_Lu
+  # > Netflix
+  # USER-AGENT,Argo*,Config_Lu
+  - DOMAIN-SUFFIX,fast.com,Config_Lu
+  - DOMAIN-SUFFIX,netflix.com,Config_Lu
+  - DOMAIN-SUFFIX,netflix.net,Config_Lu
+  - DOMAIN-SUFFIX,nflxext.com,Config_Lu
+  - DOMAIN-SUFFIX,nflximg.com,Config_Lu
+  - DOMAIN-SUFFIX,nflximg.net,Config_Lu
+  - DOMAIN-SUFFIX,nflxso.net,Config_Lu
+  - DOMAIN-SUFFIX,nflxvideo.net,Config_Lu
+  - DOMAIN-SUFFIX,netflixdnstest0.com,Config_Lu
+  - DOMAIN-SUFFIX,netflixdnstest1.com,Config_Lu
+  - DOMAIN-SUFFIX,netflixdnstest2.com,Config_Lu
+  - DOMAIN-SUFFIX,netflixdnstest3.com,Config_Lu
+  - DOMAIN-SUFFIX,netflixdnstest4.com,Config_Lu
+  - DOMAIN-SUFFIX,netflixdnstest5.com,Config_Lu
+  - DOMAIN-SUFFIX,netflixdnstest6.com,Config_Lu
+  - DOMAIN-SUFFIX,netflixdnstest7.com,Config_Lu
+  - DOMAIN-SUFFIX,netflixdnstest8.com,Config_Lu
+  - DOMAIN-SUFFIX,netflixdnstest9.com,Config_Lu
+  - IP-CIDR,23.246.0.0/18,Config_Lu,no-resolve
+  - IP-CIDR,37.77.184.0/21,Config_Lu,no-resolve
+  - IP-CIDR,45.57.0.0/17,Config_Lu,no-resolve
+  - IP-CIDR,64.120.128.0/17,Config_Lu,no-resolve
+  - IP-CIDR,66.197.128.0/17,Config_Lu,no-resolve
+  - IP-CIDR,108.175.32.0/20,Config_Lu,no-resolve
+  - IP-CIDR,192.173.64.0/18,Config_Lu,no-resolve
+  - IP-CIDR,198.38.96.0/19,Config_Lu,no-resolve
+  - IP-CIDR,198.45.48.0/20,Config_Lu,no-resolve
+  # > niconico
+  # USER-AGENT,Niconico*,Config_Lu
+  - DOMAIN-SUFFIX,dmc.nico,Config_Lu
+  - DOMAIN-SUFFIX,nicovideo.jp,Config_Lu
+  - DOMAIN-SUFFIX,nimg.jp,Config_Lu
+  - DOMAIN-SUFFIX,socdm.com,Config_Lu
+  # > PBS
+  # USER-AGENT,PBS*,Config_Lu
+  - DOMAIN-SUFFIX,pbs.org,Config_Lu
+  # > Pornhub
+  - DOMAIN-SUFFIX,phncdn.com,Config_Lu
+  - DOMAIN-SUFFIX,phprcdn.com,Config_Lu
+  - DOMAIN-SUFFIX,pornhub.com,Config_Lu
+  - DOMAIN-SUFFIX,pornhubpremium.com,Config_Lu
+  # > 台湾好
+  # USER-AGENT,TaiwanGood*,Config_Lu
+  - DOMAIN-SUFFIX,skyking.com.tw,Config_Lu
+  - DOMAIN,hamifans.emome.net,Config_Lu
+  # > Twitch
+  - DOMAIN-SUFFIX,twitch.tv,Config_Lu
+  - DOMAIN-SUFFIX,twitchcdn.net,Config_Lu
+  - DOMAIN-SUFFIX,ttvnw.net,Config_Lu
+  - DOMAIN-SUFFIX,jtvnw.net,Config_Lu
+  # > ViuTV
+  # USER-AGENT,Viu*,Config_Lu
+  # USER-AGENT,ViuTV*,Config_Lu
+  - DOMAIN-SUFFIX,viu.com,Config_Lu
+  - DOMAIN-SUFFIX,viu.tv,Config_Lu
+  - DOMAIN,api.viu.now.com,Config_Lu
+  - DOMAIN,d1k2us671qcoau.cloudfront.net,Config_Lu
+  - DOMAIN,d2anahhhmp1ffz.cloudfront.net,Config_Lu
+  - DOMAIN,dfp6rglgjqszk.cloudfront.net,Config_Lu
+  # > YouTube
+  # USER-AGENT,com.google.ios.youtube*,Config_Lu
+  # USER-AGENT,YouTube*,Config_Lu
+  - DOMAIN-SUFFIX,googlevideo.com,Config_Lu
+  - DOMAIN-SUFFIX,youtube.com,Config_Lu
+  - DOMAIN,youtubei.googleapis.com,Config_Lu
+
+  # (DNS Cache Pollution Protection)
+  # > Google
+  - DOMAIN-SUFFIX,ampproject.org,Config_Lu
+  - DOMAIN-SUFFIX,appspot.com,Config_Lu
+  - DOMAIN-SUFFIX,blogger.com,Config_Lu
+  - DOMAIN-SUFFIX,getoutline.org,Config_Lu
+  - DOMAIN-SUFFIX,gvt0.com,Config_Lu
+  - DOMAIN-SUFFIX,gvt1.com,Config_Lu
+  - DOMAIN-SUFFIX,gvt3.com,Config_Lu
+  - DOMAIN-SUFFIX,xn--ngstr-lra8j.com,Config_Lu
+  - DOMAIN-KEYWORD,google,Config_Lu
+  - DOMAIN-KEYWORD,blogspot,Config_Lu
+  # > Microsoft
+  - DOMAIN-SUFFIX,onedrive.live.com,Config_Lu
+  - DOMAIN-SUFFIX,xboxlive.com,Config_Lu
+  # > Facebook
+  - DOMAIN-SUFFIX,v2raytech.com,Config_Lu
+  - DOMAIN-SUFFIX,hijk.art,Config_Lu
+  - DOMAIN-SUFFIX,hijk.pw,Config_Lu
+  - DOMAIN-SUFFIX,hijk.pp.ua,Config_Lu
+  - DOMAIN-SUFFIX,cdninstagram.com,Config_Lu
+  - DOMAIN-SUFFIX,fb.com,Config_Lu
+  - DOMAIN-SUFFIX,fb.me,Config_Lu
+  - DOMAIN-SUFFIX,fbaddins.com,Config_Lu
+  - DOMAIN-SUFFIX,fbcdn.net,Config_Lu
+  - DOMAIN-SUFFIX,fbsbx.com,Config_Lu
+  - DOMAIN-SUFFIX,fbworkmail.com,Config_Lu
+  - DOMAIN-SUFFIX,instagram.com,Config_Lu
+  - DOMAIN-SUFFIX,m.me,Config_Lu
+  - DOMAIN-SUFFIX,messenger.com,Config_Lu
+  - DOMAIN-SUFFIX,oculus.com,Config_Lu
+  - DOMAIN-SUFFIX,oculuscdn.com,Config_Lu
+  - DOMAIN-SUFFIX,rocksdb.org,Config_Lu
+  - DOMAIN-SUFFIX,whatsapp.com,Config_Lu
+  - DOMAIN-SUFFIX,whatsapp.net,Config_Lu
+  - DOMAIN-KEYWORD,facebook,Config_Lu
+  - IP-CIDR,3.123.36.126/32,Config_Lu,no-resolve
+  - IP-CIDR,35.157.215.84/32,Config_Lu,no-resolve
+  - IP-CIDR,35.157.217.255/32,Config_Lu,no-resolve
+  - IP-CIDR,52.58.209.134/32,Config_Lu,no-resolve
+  - IP-CIDR,54.93.124.31/32,Config_Lu,no-resolve
+  - IP-CIDR,54.162.243.80/32,Config_Lu,no-resolve
+  - IP-CIDR,54.173.34.141/32,Config_Lu,no-resolve
+  - IP-CIDR,54.235.23.242/32,Config_Lu,no-resolve
+  - IP-CIDR,169.45.248.118/32,Config_Lu,no-resolve
+  # > Twitter
+  - DOMAIN-SUFFIX,pscp.tv,Config_Lu
+  - DOMAIN-SUFFIX,periscope.tv,Config_Lu
+  - DOMAIN-SUFFIX,t.co,Config_Lu
+  - DOMAIN-SUFFIX,twimg.co,Config_Lu
+  - DOMAIN-SUFFIX,twimg.com,Config_Lu
+  - DOMAIN-SUFFIX,twitpic.com,Config_Lu
+  - DOMAIN-SUFFIX,vine.co,Config_Lu
+  - DOMAIN-KEYWORD,twitter,Config_Lu
+  # > Telegram
+  - DOMAIN-SUFFIX,t.me,Config_Lu
+  - DOMAIN-SUFFIX,tlanyan.me,Config_Lu
+  - DOMAIN-SUFFIX,tdesktop.com,Config_Lu
+  - DOMAIN-SUFFIX,telegra.ph,Config_Lu
+  - DOMAIN-SUFFIX,telegram.me,Config_Lu
+  - DOMAIN-SUFFIX,telegram.org,Config_Lu
+  - DOMAIN-SUFFIX,telesco.pe,Config_Lu
+  - IP-CIDR,91.108.4.0/22,Config_Lu,no-resolve
+  - IP-CIDR,91.108.8.0/22,Config_Lu,no-resolve
+  - IP-CIDR,91.108.12.0/22,Config_Lu,no-resolve
+  - IP-CIDR,91.108.16.0/22,Config_Lu,no-resolve
+  - IP-CIDR,91.108.56.0/22,Config_Lu,no-resolve
+  - IP-CIDR,149.154.160.0/20,Config_Lu,no-resolve
+  - IP-CIDR,2001:b28:f23d::/48,Config_Lu,no-resolve
+  - IP-CIDR,2001:b28:f23f::/48,Config_Lu,no-resolve
+  - IP-CIDR,2001:67c:4e8::/48,Config_Lu,no-resolve
+  # > Line
+  - DOMAIN-SUFFIX,line.me,Config_Lu
+  - DOMAIN-SUFFIX,line-apps.com,Config_Lu
+  - DOMAIN-SUFFIX,line-scdn.net,Config_Lu
+  - DOMAIN-SUFFIX,naver.jp,Config_Lu
+  - IP-CIDR,103.2.30.0/23,Config_Lu,no-resolve
+  - IP-CIDR,125.209.208.0/20,Config_Lu,no-resolve
+  - IP-CIDR,147.92.128.0/17,Config_Lu,no-resolve
+  - IP-CIDR,203.104.144.0/21,Config_Lu,no-resolve
+  # > Other
+  - DOMAIN-SUFFIX,4shared.com,Config_Lu
+  - DOMAIN-SUFFIX,520cc.cc,Config_Lu
+  - DOMAIN-SUFFIX,881903.com,Config_Lu
+  - DOMAIN-SUFFIX,9cache.com,Config_Lu
+  - DOMAIN-SUFFIX,9gag.com,Config_Lu
+  - DOMAIN-SUFFIX,abc.com,Config_Lu
+  - DOMAIN-SUFFIX,abc.net.au,Config_Lu
+  - DOMAIN-SUFFIX,abebooks.com,Config_Lu
+  - DOMAIN-SUFFIX,amazon.co.jp,Config_Lu
+  - DOMAIN-SUFFIX,apigee.com,Config_Lu
+  - DOMAIN-SUFFIX,apk-dl.com,Config_Lu
+  - DOMAIN-SUFFIX,apkfind.com,Config_Lu
+  - DOMAIN-SUFFIX,apkmirror.com,Config_Lu
+  - DOMAIN-SUFFIX,apkmonk.com,Config_Lu
+  - DOMAIN-SUFFIX,apkpure.com,Config_Lu
+  - DOMAIN-SUFFIX,aptoide.com,Config_Lu
+  - DOMAIN-SUFFIX,archive.is,Config_Lu
+  - DOMAIN-SUFFIX,archive.org,Config_Lu
+  - DOMAIN-SUFFIX,arte.tv,Config_Lu
+  - DOMAIN-SUFFIX,artstation.com,Config_Lu
+  - DOMAIN-SUFFIX,arukas.io,Config_Lu
+  - DOMAIN-SUFFIX,ask.com,Config_Lu
+  - DOMAIN-SUFFIX,avg.com,Config_Lu
+  - DOMAIN-SUFFIX,avgle.com,Config_Lu
+  - DOMAIN-SUFFIX,badoo.com,Config_Lu
+  - DOMAIN-SUFFIX,bandwagonhost.com,Config_Lu
+  - DOMAIN-SUFFIX,bbc.com,Config_Lu
+  - DOMAIN-SUFFIX,behance.net,Config_Lu
+  - DOMAIN-SUFFIX,bibox.com,Config_Lu
+  - DOMAIN-SUFFIX,biggo.com.tw,Config_Lu
+  - DOMAIN-SUFFIX,binance.com,Config_Lu
+  - DOMAIN-SUFFIX,bitcointalk.org,Config_Lu
+  - DOMAIN-SUFFIX,bitfinex.com,Config_Lu
+  - DOMAIN-SUFFIX,bitmex.com,Config_Lu
+  - DOMAIN-SUFFIX,bit-z.com,Config_Lu
+  - DOMAIN-SUFFIX,bloglovin.com,Config_Lu
+  - DOMAIN-SUFFIX,bloomberg.cn,Config_Lu
+  - DOMAIN-SUFFIX,bloomberg.com,Config_Lu
+  - DOMAIN-SUFFIX,blubrry.com,Config_Lu
+  - DOMAIN-SUFFIX,book.com.tw,Config_Lu
+  - DOMAIN-SUFFIX,booklive.jp,Config_Lu
+  - DOMAIN-SUFFIX,books.com.tw,Config_Lu
+  - DOMAIN-SUFFIX,boslife.net,Config_Lu
+  - DOMAIN-SUFFIX,box.com,Config_Lu
+  - DOMAIN-SUFFIX,businessinsider.com,Config_Lu
+  - DOMAIN-SUFFIX,bwh1.net,Config_Lu
+  - DOMAIN-SUFFIX,castbox.fm,Config_Lu
+  - DOMAIN-SUFFIX,cbc.ca,Config_Lu
+  - DOMAIN-SUFFIX,cdw.com,Config_Lu
+  - DOMAIN-SUFFIX,change.org,Config_Lu
+  - DOMAIN-SUFFIX,channelnewsasia.com,Config_Lu
+  - DOMAIN-SUFFIX,ck101.com,Config_Lu
+  - DOMAIN-SUFFIX,clarionproject.org,Config_Lu
+  - DOMAIN-SUFFIX,clyp.it,Config_Lu
+  - DOMAIN-SUFFIX,cna.com.tw,Config_Lu
+  - DOMAIN-SUFFIX,comparitech.com,Config_Lu
+  - DOMAIN-SUFFIX,conoha.jp,Config_Lu
+  - DOMAIN-SUFFIX,crucial.com,Config_Lu
+  - DOMAIN-SUFFIX,cts.com.tw,Config_Lu
+  - DOMAIN-SUFFIX,cw.com.tw,Config_Lu
+  - DOMAIN-SUFFIX,cyberctm.com,Config_Lu
+  - DOMAIN-SUFFIX,dailymotion.com,Config_Lu
+  - DOMAIN-SUFFIX,dailyview.tw,Config_Lu
+  - DOMAIN-SUFFIX,daum.net,Config_Lu
+  - DOMAIN-SUFFIX,daumcdn.net,Config_Lu
+  - DOMAIN-SUFFIX,dcard.tw,Config_Lu
+  - DOMAIN-SUFFIX,deepdiscount.com,Config_Lu
+  - DOMAIN-SUFFIX,depositphotos.com,Config_Lu
+  - DOMAIN-SUFFIX,deviantart.com,Config_Lu
+  - DOMAIN-SUFFIX,disconnect.me,Config_Lu
+  - DOMAIN-SUFFIX,discordapp.com,Config_Lu
+  - DOMAIN-SUFFIX,discordapp.net,Config_Lu
+  - DOMAIN-SUFFIX,disqus.com,Config_Lu
+  - DOMAIN-SUFFIX,dlercloud.com,Config_Lu
+  - DOMAIN-SUFFIX,dns2go.com,Config_Lu
+  - DOMAIN-SUFFIX,dowjones.com,Config_Lu
+  - DOMAIN-SUFFIX,dropbox.com,Config_Lu
+  - DOMAIN-SUFFIX,dropboxusercontent.com,Config_Lu
+  - DOMAIN-SUFFIX,duckduckgo.com,Config_Lu
+  - DOMAIN-SUFFIX,dw.com,Config_Lu
+  - DOMAIN-SUFFIX,dynu.com,Config_Lu
+  - DOMAIN-SUFFIX,earthcam.com,Config_Lu
+  - DOMAIN-SUFFIX,ebookservice.tw,Config_Lu
+  - DOMAIN-SUFFIX,economist.com,Config_Lu
+  - DOMAIN-SUFFIX,edgecastcdn.net,Config_Lu
+  - DOMAIN-SUFFIX,edu,Config_Lu
+  - DOMAIN-SUFFIX,elpais.com,Config_Lu
+  - DOMAIN-SUFFIX,enanyang.my,Config_Lu
+  - DOMAIN-SUFFIX,encyclopedia.com,Config_Lu
+  - DOMAIN-SUFFIX,esoir.be,Config_Lu
+  - DOMAIN-SUFFIX,etherscan.io,Config_Lu
+  - DOMAIN-SUFFIX,euronews.com,Config_Lu
+  - DOMAIN-SUFFIX,evozi.com,Config_Lu
+  - DOMAIN-SUFFIX,feedly.com,Config_Lu
+  - DOMAIN-SUFFIX,firech.at,Config_Lu
+  - DOMAIN-SUFFIX,flickr.com,Config_Lu
+  - DOMAIN-SUFFIX,flitto.com,Config_Lu
+  - DOMAIN-SUFFIX,foreignpolicy.com,Config_Lu
+  - DOMAIN-SUFFIX,freebrowser.org,Config_Lu
+  - DOMAIN-SUFFIX,freewechat.com,Config_Lu
+  - DOMAIN-SUFFIX,freeweibo.com,Config_Lu
+  - DOMAIN-SUFFIX,friday.tw,Config_Lu
+  - DOMAIN-SUFFIX,ftchinese.com,Config_Lu
+  - DOMAIN-SUFFIX,ftimg.net,Config_Lu
+  - DOMAIN-SUFFIX,gate.io,Config_Lu
+  - DOMAIN-SUFFIX,getlantern.org,Config_Lu
+  - DOMAIN-SUFFIX,getsync.com,Config_Lu
+  - DOMAIN-SUFFIX,globalvoices.org,Config_Lu
+  - DOMAIN-SUFFIX,goo.ne.jp,Config_Lu
+  - DOMAIN-SUFFIX,goodreads.com,Config_Lu
+  - DOMAIN-SUFFIX,gov,Config_Lu
+  - DOMAIN-SUFFIX,gov.tw,Config_Lu
+  - DOMAIN-SUFFIX,greatfire.org,Config_Lu
+  - DOMAIN-SUFFIX,gumroad.com,Config_Lu
+  - DOMAIN-SUFFIX,hbg.com,Config_Lu
+  - DOMAIN-SUFFIX,heroku.com,Config_Lu
+  - DOMAIN-SUFFIX,hightail.com,Config_Lu
+  - DOMAIN-SUFFIX,hk01.com,Config_Lu
+  - DOMAIN-SUFFIX,hkbf.org,Config_Lu
+  - DOMAIN-SUFFIX,hkbookcity.com,Config_Lu
+  - DOMAIN-SUFFIX,hkej.com,Config_Lu
+  - DOMAIN-SUFFIX,hket.com,Config_Lu
+  - DOMAIN-SUFFIX,hkgolden.com,Config_Lu
+  - DOMAIN-SUFFIX,hootsuite.com,Config_Lu
+  - DOMAIN-SUFFIX,hudson.org,Config_Lu
+  - DOMAIN-SUFFIX,hyread.com.tw,Config_Lu
+  - DOMAIN-SUFFIX,ibtimes.com,Config_Lu
+  - DOMAIN-SUFFIX,i-cable.com,Config_Lu
+  - DOMAIN-SUFFIX,icij.org,Config_Lu
+  - DOMAIN-SUFFIX,icoco.com,Config_Lu
+  - DOMAIN-SUFFIX,imgur.com,Config_Lu
+  - DOMAIN-SUFFIX,initiummall.com,Config_Lu
+  - DOMAIN-SUFFIX,insecam.org,Config_Lu
+  - DOMAIN-SUFFIX,ipfs.io,Config_Lu
+  - DOMAIN-SUFFIX,issuu.com,Config_Lu
+  - DOMAIN-SUFFIX,istockphoto.com,Config_Lu
+  - DOMAIN-SUFFIX,japantimes.co.jp,Config_Lu
+  - DOMAIN-SUFFIX,jiji.com,Config_Lu
+  - DOMAIN-SUFFIX,jinx.com,Config_Lu
+  - DOMAIN-SUFFIX,jkforum.net,Config_Lu
+  - DOMAIN-SUFFIX,joinmastodon.org,Config_Lu
+  - DOMAIN-SUFFIX,justmysocks.net,Config_Lu
+  - DOMAIN-SUFFIX,justpaste.it,Config_Lu
+  - DOMAIN-SUFFIX,kakao.com,Config_Lu
+  - DOMAIN-SUFFIX,kakaocorp.com,Config_Lu
+  - DOMAIN-SUFFIX,kik.com,Config_Lu
+  - DOMAIN-SUFFIX,kobo.com,Config_Lu
+  - DOMAIN-SUFFIX,kobobooks.com,Config_Lu
+  - DOMAIN-SUFFIX,kodingen.com,Config_Lu
+  - DOMAIN-SUFFIX,lemonde.fr,Config_Lu
+  - DOMAIN-SUFFIX,lepoint.fr,Config_Lu
+  - DOMAIN-SUFFIX,lihkg.com,Config_Lu
+  - DOMAIN-SUFFIX,listennotes.com,Config_Lu
+  - DOMAIN-SUFFIX,livestream.com,Config_Lu
+  - DOMAIN-SUFFIX,logmein.com,Config_Lu
+  - DOMAIN-SUFFIX,mail.ru,Config_Lu
+  - DOMAIN-SUFFIX,mailchimp.com,Config_Lu
+  - DOMAIN-SUFFIX,marc.info,Config_Lu
+  - DOMAIN-SUFFIX,matters.news,Config_Lu
+  - DOMAIN-SUFFIX,maying.co,Config_Lu
+  - DOMAIN-SUFFIX,medium.com,Config_Lu
+  - DOMAIN-SUFFIX,mega.nz,Config_Lu
+  - DOMAIN-SUFFIX,mil,Config_Lu
+  - DOMAIN-SUFFIX,mingpao.com,Config_Lu
+  - DOMAIN-SUFFIX,mobile01.com,Config_Lu
+  - DOMAIN-SUFFIX,myspace.com,Config_Lu
+  - DOMAIN-SUFFIX,myspacecdn.com,Config_Lu
+  - DOMAIN-SUFFIX,nanyang.com,Config_Lu
+  - DOMAIN-SUFFIX,naver.com,Config_Lu
+  - DOMAIN-SUFFIX,neowin.net,Config_Lu
+  - DOMAIN-SUFFIX,newstapa.org,Config_Lu
+  - DOMAIN-SUFFIX,nexitally.com,Config_Lu
+  - DOMAIN-SUFFIX,nhk.or.jp,Config_Lu
+  - DOMAIN-SUFFIX,nicovideo.jp,Config_Lu
+  - DOMAIN-SUFFIX,nii.ac.jp,Config_Lu
+  - DOMAIN-SUFFIX,nikkei.com,Config_Lu
+  - DOMAIN-SUFFIX,nofile.io,Config_Lu
+  - DOMAIN-SUFFIX,now.com,Config_Lu
+  - DOMAIN-SUFFIX,nrk.no,Config_Lu
+  - DOMAIN-SUFFIX,nyt.com,Config_Lu
+  - DOMAIN-SUFFIX,nytchina.com,Config_Lu
+  - DOMAIN-SUFFIX,nytcn.me,Config_Lu
+  - DOMAIN-SUFFIX,nytco.com,Config_Lu
+  - DOMAIN-SUFFIX,nytimes.com,Config_Lu
+  - DOMAIN-SUFFIX,nytimg.com,Config_Lu
+  - DOMAIN-SUFFIX,nytlog.com,Config_Lu
+  - DOMAIN-SUFFIX,nytstyle.com,Config_Lu
+  - DOMAIN-SUFFIX,ok.ru,Config_Lu
+  - DOMAIN-SUFFIX,okex.com,Config_Lu
+  - DOMAIN-SUFFIX,on.cc,Config_Lu
+  - DOMAIN-SUFFIX,orientaldaily.com.my,Config_Lu
+  - DOMAIN-SUFFIX,overcast.fm,Config_Lu
+  - DOMAIN-SUFFIX,paltalk.com,Config_Lu
+  - DOMAIN-SUFFIX,pao-pao.net,Config_Lu
+  - DOMAIN-SUFFIX,parsevideo.com,Config_Lu
+  - DOMAIN-SUFFIX,pbxes.com,Config_Lu
+  - DOMAIN-SUFFIX,pcdvd.com.tw,Config_Lu
+  - DOMAIN-SUFFIX,pchome.com.tw,Config_Lu
+  - DOMAIN-SUFFIX,pcloud.com,Config_Lu
+  - DOMAIN-SUFFIX,picacomic.com,Config_Lu
+  - DOMAIN-SUFFIX,pinimg.com,Config_Lu
+  - DOMAIN-SUFFIX,pixiv.net,Config_Lu
+  - DOMAIN-SUFFIX,player.fm,Config_Lu
+  - DOMAIN-SUFFIX,plurk.com,Config_Lu
+  - DOMAIN-SUFFIX,po18.tw,Config_Lu
+  - DOMAIN-SUFFIX,potato.im,Config_Lu
+  - DOMAIN-SUFFIX,potatso.com,Config_Lu
+  - DOMAIN-SUFFIX,prism-break.org,Config_Lu
+  - DOMAIN-SUFFIX,proxifier.com,Config_Lu
+  - DOMAIN-SUFFIX,pt.im,Config_Lu
+  - DOMAIN-SUFFIX,pts.org.tw,Config_Lu
+  - DOMAIN-SUFFIX,pubu.com.tw,Config_Lu
+  - DOMAIN-SUFFIX,pubu.tw,Config_Lu
+  - DOMAIN-SUFFIX,pureapk.com,Config_Lu
+  - DOMAIN-SUFFIX,quora.com,Config_Lu
+  - DOMAIN-SUFFIX,quoracdn.net,Config_Lu
+  - DOMAIN-SUFFIX,rakuten.co.jp,Config_Lu
+  - DOMAIN-SUFFIX,readingtimes.com.tw,Config_Lu
+  - DOMAIN-SUFFIX,readmoo.com,Config_Lu
+  - DOMAIN-SUFFIX,redbubble.com,Config_Lu
+  - DOMAIN-SUFFIX,reddit.com,Config_Lu
+  - DOMAIN-SUFFIX,redditmedia.com,Config_Lu
+  - DOMAIN-SUFFIX,redditstatic.com,Config_Lu
+  - DOMAIN-SUFFIX,resilio.com,Config_Lu
+  - DOMAIN-SUFFIX,reuters.com,Config_Lu
+  - DOMAIN-SUFFIX,reutersmedia.net,Config_Lu
+  - DOMAIN-SUFFIX,rfi.fr,Config_Lu
+  - DOMAIN-SUFFIX,rixcloud.com,Config_Lu
+  - DOMAIN-SUFFIX,roadshow.hk,Config_Lu
+  - DOMAIN-SUFFIX,scmp.com,Config_Lu
+  - DOMAIN-SUFFIX,scribd.com,Config_Lu
+  - DOMAIN-SUFFIX,seatguru.com,Config_Lu
+  - DOMAIN-SUFFIX,shadowsocks.org,Config_Lu
+  - DOMAIN-SUFFIX,shopee.tw,Config_Lu
+  - DOMAIN-SUFFIX,slideshare.net,Config_Lu
+  - DOMAIN-SUFFIX,softfamous.com,Config_Lu
+  - DOMAIN-SUFFIX,soundcloud.com,Config_Lu
+  - DOMAIN-SUFFIX,ssrcloud.org,Config_Lu
+  - DOMAIN-SUFFIX,startpage.com,Config_Lu
+  - DOMAIN-SUFFIX,steamcommunity.com,Config_Lu
+  - DOMAIN-SUFFIX,steemit.com,Config_Lu
+  - DOMAIN-SUFFIX,steemitwallet.com,Config_Lu
+  - DOMAIN-SUFFIX,t66y.com,Config_Lu
+  - DOMAIN-SUFFIX,tapatalk.com,Config_Lu
+  - DOMAIN-SUFFIX,teco-hk.org,Config_Lu
+  - DOMAIN-SUFFIX,teco-mo.org,Config_Lu
+  - DOMAIN-SUFFIX,teddysun.com,Config_Lu
+  - DOMAIN-SUFFIX,textnow.me,Config_Lu
+  - DOMAIN-SUFFIX,theguardian.com,Config_Lu
+  - DOMAIN-SUFFIX,theinitium.com,Config_Lu
+  - DOMAIN-SUFFIX,thetvdb.com,Config_Lu
+  - DOMAIN-SUFFIX,tineye.com,Config_Lu
+  - DOMAIN-SUFFIX,torproject.org,Config_Lu
+  - DOMAIN-SUFFIX,tumblr.com,Config_Lu
+  - DOMAIN-SUFFIX,turbobit.net,Config_Lu
+  - DOMAIN-SUFFIX,tutanota.com,Config_Lu
+  - DOMAIN-SUFFIX,tvboxnow.com,Config_Lu
+  - DOMAIN-SUFFIX,udn.com,Config_Lu
+  - DOMAIN-SUFFIX,unseen.is,Config_Lu
+  - DOMAIN-SUFFIX,upmedia.mg,Config_Lu
+  - DOMAIN-SUFFIX,uptodown.com,Config_Lu
+  - DOMAIN-SUFFIX,urbandictionary.com,Config_Lu
+  - DOMAIN-SUFFIX,ustream.tv,Config_Lu
+  - DOMAIN-SUFFIX,uwants.com,Config_Lu
+  - DOMAIN-SUFFIX,v2ray.com,Config_Lu
+  - DOMAIN-SUFFIX,viber.com,Config_Lu
+  - DOMAIN-SUFFIX,videopress.com,Config_Lu
+  - DOMAIN-SUFFIX,vimeo.com,Config_Lu
+  - DOMAIN-SUFFIX,voachinese.com,Config_Lu
+  - DOMAIN-SUFFIX,voanews.com,Config_Lu
+  - DOMAIN-SUFFIX,voxer.com,Config_Lu
+  - DOMAIN-SUFFIX,vzw.com,Config_Lu
+  - DOMAIN-SUFFIX,w3schools.com,Config_Lu
+  - DOMAIN-SUFFIX,washingtonpost.com,Config_Lu
+  - DOMAIN-SUFFIX,wattpad.com,Config_Lu
+  - DOMAIN-SUFFIX,whoer.net,Config_Lu
+  - DOMAIN-SUFFIX,wikimapia.org,Config_Lu
+  - DOMAIN-SUFFIX,wikimedia.org,Config_Lu
+  - DOMAIN-SUFFIX,wikipedia.org,Config_Lu
+  - DOMAIN-SUFFIX,wikiquote.org,Config_Lu
+  - DOMAIN-SUFFIX,wikiwand.com,Config_Lu
+  - DOMAIN-SUFFIX,winudf.com,Config_Lu
+  - DOMAIN-SUFFIX,wire.com,Config_Lu
+  - DOMAIN-SUFFIX,wordpress.com,Config_Lu
+  - DOMAIN-SUFFIX,workflow.is,Config_Lu
+  - DOMAIN-SUFFIX,worldcat.org,Config_Lu
+  - DOMAIN-SUFFIX,wsj.com,Config_Lu
+  - DOMAIN-SUFFIX,wsj.net,Config_Lu
+  - DOMAIN-SUFFIX,xhamster.com,Config_Lu
+  - DOMAIN-SUFFIX,xn--90wwvt03e.com,Config_Lu
+  - DOMAIN-SUFFIX,xn--i2ru8q2qg.com,Config_Lu
+  - DOMAIN-SUFFIX,xnxx.com,Config_Lu
+  - DOMAIN-SUFFIX,xvideos.com,Config_Lu
+  - DOMAIN-SUFFIX,yahoo.com,Config_Lu
+  - DOMAIN-SUFFIX,yandex.ru,Config_Lu
+  - DOMAIN-SUFFIX,ycombinator.com,Config_Lu
+  - DOMAIN-SUFFIX,yesasia.com,Config_Lu
+  - DOMAIN-SUFFIX,yes-news.com,Config_Lu
+  - DOMAIN-SUFFIX,yomiuri.co.jp,Config_Lu
+  - DOMAIN-SUFFIX,you-get.org,Config_Lu
+  - DOMAIN-SUFFIX,zaobao.com,Config_Lu
+  - DOMAIN-SUFFIX,zb.com,Config_Lu
+  - DOMAIN-SUFFIX,zello.com,Config_Lu
+  - DOMAIN-SUFFIX,zeronet.io,Config_Lu
+  - DOMAIN-SUFFIX,zoom.us,Config_Lu
+  - DOMAIN-KEYWORD,github,Config_Lu
+  - DOMAIN-KEYWORD,jav,Config_Lu
+  - DOMAIN-KEYWORD,pinterest,Config_Lu
+  - DOMAIN-KEYWORD,porn,Config_Lu
+  - DOMAIN-KEYWORD,wikileaks,Config_Lu
+
+  # (Region-Restricted Access Denied)
+  - DOMAIN-SUFFIX,apartmentratings.com,Config_Lu
+  - DOMAIN-SUFFIX,apartments.com,Config_Lu
+  - DOMAIN-SUFFIX,bankmobilevibe.com,Config_Lu
+  - DOMAIN-SUFFIX,bing.com,Config_Lu
+  - DOMAIN-SUFFIX,booktopia.com.au,Config_Lu
+  - DOMAIN-SUFFIX,cccat.io,Config_Lu
+  - DOMAIN-SUFFIX,centauro.com.br,Config_Lu
+  - DOMAIN-SUFFIX,clearsurance.com,Config_Lu
+  - DOMAIN-SUFFIX,costco.com,Config_Lu
+  - DOMAIN-SUFFIX,crackle.com,Config_Lu
+  - DOMAIN-SUFFIX,depositphotos.cn,Config_Lu
+  - DOMAIN-SUFFIX,dish.com,Config_Lu
+  - DOMAIN-SUFFIX,dmm.co.jp,Config_Lu
+  - DOMAIN-SUFFIX,dmm.com,Config_Lu
+  - DOMAIN-SUFFIX,dnvod.tv,Config_Lu
+  - DOMAIN-SUFFIX,esurance.com,Config_Lu
+  - DOMAIN-SUFFIX,extmatrix.com,Config_Lu
+  - DOMAIN-SUFFIX,fastpic.ru,Config_Lu
+  - DOMAIN-SUFFIX,flipboard.com,Config_Lu
+  - DOMAIN-SUFFIX,fnac.be,Config_Lu
+  - DOMAIN-SUFFIX,fnac.com,Config_Lu
+  - DOMAIN-SUFFIX,funkyimg.com,Config_Lu
+  - DOMAIN-SUFFIX,fxnetworks.com,Config_Lu
+  - DOMAIN-SUFFIX,gettyimages.com,Config_Lu
+  - DOMAIN-SUFFIX,go.com,Config_Lu
+  - DOMAIN-SUFFIX,here.com,Config_Lu
+  - DOMAIN-SUFFIX,jcpenney.com,Config_Lu
+  - DOMAIN-SUFFIX,jiehua.tv,Config_Lu
+  - DOMAIN-SUFFIX,mailfence.com,Config_Lu
+  - DOMAIN-SUFFIX,nationwide.com,Config_Lu
+  - DOMAIN-SUFFIX,nbc.com,Config_Lu
+  - DOMAIN-SUFFIX,nexon.com,Config_Lu
+  - DOMAIN-SUFFIX,nordstrom.com,Config_Lu
+  - DOMAIN-SUFFIX,nordstromimage.com,Config_Lu
+  - DOMAIN-SUFFIX,nordstromrack.com,Config_Lu
+  - DOMAIN-SUFFIX,superpages.com,Config_Lu
+  - DOMAIN-SUFFIX,target.com,Config_Lu
+  - DOMAIN-SUFFIX,thinkgeek.com,Config_Lu
+  - DOMAIN-SUFFIX,tracfone.com,Config_Lu
+  - DOMAIN-SUFFIX,unity3d.com,Config_Lu
+  - DOMAIN-SUFFIX,uploader.jp,Config_Lu
+  - DOMAIN-SUFFIX,vevo.com,Config_Lu
+  - DOMAIN-SUFFIX,viu.tv,Config_Lu
+  - DOMAIN-SUFFIX,vk.com,Config_Lu
+  - DOMAIN-SUFFIX,vsco.co,Config_Lu
+  - DOMAIN-SUFFIX,xfinity.com,Config_Lu
+  - DOMAIN-SUFFIX,zattoo.com,Config_Lu
+  # USER-AGENT,Roam*,Config_Lu
+
+  # (The Most Popular Sites)
+  # > Apple
+  # >> TestFlight
+  - DOMAIN,testflight.apple.com,Config_Lu
+  # >> Apple URL Shortener
+  - DOMAIN-SUFFIX,appsto.re,Config_Lu
+  # >> iBooks Store download
+  - DOMAIN,books.itunes.apple.com,Config_Lu
+  # >> iTunes Store Moveis Trailers
+  - DOMAIN,hls.itunes.apple.com,Config_Lu
+  # >> App Store Preview
+  - DOMAIN,apps.apple.com,Config_Lu
+  - DOMAIN,itunes.apple.com,Config_Lu
+  # >> Spotlight
+  - DOMAIN,api-glb-sea.smoot.apple.com,Config_Lu
+  # >> Dictionary
+  - DOMAIN,lookup-api.apple.com,Config_Lu
+  # > Google
+  - DOMAIN-SUFFIX,abc.xyz,Config_Lu
+  - DOMAIN-SUFFIX,android.com,Config_Lu
+  - DOMAIN-SUFFIX,androidify.com,Config_Lu
+  - DOMAIN-SUFFIX,dialogflow.com,Config_Lu
+  - DOMAIN-SUFFIX,autodraw.com,Config_Lu
+  - DOMAIN-SUFFIX,capitalg.com,Config_Lu
+  - DOMAIN-SUFFIX,certificate-transparency.org,Config_Lu
+  - DOMAIN-SUFFIX,chrome.com,Config_Lu
+  - DOMAIN-SUFFIX,chromeexperiments.com,Config_Lu
+  - DOMAIN-SUFFIX,chromestatus.com,Config_Lu
+  - DOMAIN-SUFFIX,chromium.org,Config_Lu
+  - DOMAIN-SUFFIX,creativelab5.com,Config_Lu
+  - DOMAIN-SUFFIX,debug.com,Config_Lu
+  - DOMAIN-SUFFIX,deepmind.com,Config_Lu
+  - DOMAIN-SUFFIX,firebaseio.com,Config_Lu
+  - DOMAIN-SUFFIX,getmdl.io,Config_Lu
+  - DOMAIN-SUFFIX,ggpht.com,Config_Lu
+  - DOMAIN-SUFFIX,gmail.com,Config_Lu
+  - DOMAIN-SUFFIX,gmodules.com,Config_Lu
+  - DOMAIN-SUFFIX,godoc.org,Config_Lu
+  - DOMAIN-SUFFIX,golang.org,Config_Lu
+  - DOMAIN-SUFFIX,gstatic.com,Config_Lu
+  - DOMAIN-SUFFIX,gv.com,Config_Lu
+  - DOMAIN-SUFFIX,gwtproject.org,Config_Lu
+  - DOMAIN-SUFFIX,itasoftware.com,Config_Lu
+  - DOMAIN-SUFFIX,madewithcode.com,Config_Lu
+  - DOMAIN-SUFFIX,material.io,Config_Lu
+  - DOMAIN-SUFFIX,polymer-project.org,Config_Lu
+  - DOMAIN-SUFFIX,admin.recaptcha.net,Config_Lu
+  - DOMAIN-SUFFIX,recaptcha.net,Config_Lu
+  - DOMAIN-SUFFIX,shattered.io,Config_Lu
+  - DOMAIN-SUFFIX,synergyse.com,Config_Lu
+  - DOMAIN-SUFFIX,telephony.goog,Config_Lu
+  - DOMAIN-SUFFIX,tensorflow.org,Config_Lu
+  - DOMAIN-SUFFIX,tfhub.dev,Config_Lu
+  - DOMAIN-SUFFIX,tiltbrush.com,Config_Lu
+  - DOMAIN-SUFFIX,waveprotocol.org,Config_Lu
+  - DOMAIN-SUFFIX,waymo.com,Config_Lu
+  - DOMAIN-SUFFIX,webmproject.org,Config_Lu
+  - DOMAIN-SUFFIX,webrtc.org,Config_Lu
+  - DOMAIN-SUFFIX,whatbrowser.org,Config_Lu
+  - DOMAIN-SUFFIX,widevine.com,Config_Lu
+  - DOMAIN-SUFFIX,x.company,Config_Lu
+  - DOMAIN-SUFFIX,youtu.be,Config_Lu
+  - DOMAIN-SUFFIX,yt.be,Config_Lu
+  - DOMAIN-SUFFIX,ytimg.com,Config_Lu
+  # > Microsoft
+  # >> Microsoft OneDrive
+  - DOMAIN-SUFFIX,1drv.com,Config_Lu
+  - DOMAIN-SUFFIX,1drv.ms,Config_Lu
+  - DOMAIN-SUFFIX,blob.core.windows.net,Config_Lu
+  - DOMAIN-SUFFIX,livefilestore.com,Config_Lu
+  - DOMAIN-SUFFIX,onedrive.com,Config_Lu
+  - DOMAIN-SUFFIX,storage.live.com,Config_Lu
+  - DOMAIN-SUFFIX,storage.msn.com,Config_Lu
+  - DOMAIN,oneclient.sfx.ms,Config_Lu
+  # > Other
+  - DOMAIN-SUFFIX,0rz.tw,Config_Lu
+  - DOMAIN-SUFFIX,4bluestones.biz,Config_Lu
+  - DOMAIN-SUFFIX,9bis.net,Config_Lu
+  - DOMAIN-SUFFIX,allconnected.co,Config_Lu
+  - DOMAIN-SUFFIX,aol.com,Config_Lu
+  - DOMAIN-SUFFIX,bcc.com.tw,Config_Lu
+  - DOMAIN-SUFFIX,bit.ly,Config_Lu
+  - DOMAIN-SUFFIX,bitshare.com,Config_Lu
+  - DOMAIN-SUFFIX,blog.jp,Config_Lu
+  - DOMAIN-SUFFIX,blogimg.jp,Config_Lu
+  - DOMAIN-SUFFIX,blogtd.org,Config_Lu
+  - DOMAIN-SUFFIX,broadcast.co.nz,Config_Lu
+  - DOMAIN-SUFFIX,camfrog.com,Config_Lu
+  - DOMAIN-SUFFIX,cfos.de,Config_Lu
+  - DOMAIN-SUFFIX,citypopulation.de,Config_Lu
+  - DOMAIN-SUFFIX,cloudfront.net,Config_Lu
+  - DOMAIN-SUFFIX,ctitv.com.tw,Config_Lu
+  - DOMAIN-SUFFIX,cuhk.edu.hk,Config_Lu
+  - DOMAIN-SUFFIX,cusu.hk,Config_Lu
+  - DOMAIN-SUFFIX,discord.gg,Config_Lu
+  - DOMAIN-SUFFIX,discuss.com.hk,Config_Lu
+  - DOMAIN-SUFFIX,dropboxapi.com,Config_Lu
+  - DOMAIN-SUFFIX,duolingo.cn,Config_Lu
+  - DOMAIN-SUFFIX,edditstatic.com,Config_Lu
+  - DOMAIN-SUFFIX,flickriver.com,Config_Lu
+  - DOMAIN-SUFFIX,focustaiwan.tw,Config_Lu
+  - DOMAIN-SUFFIX,free.fr,Config_Lu
+  - DOMAIN-SUFFIX,gigacircle.com,Config_Lu
+  - DOMAIN-SUFFIX,hk-pub.com,Config_Lu
+  - DOMAIN-SUFFIX,hosting.co.uk,Config_Lu
+  - DOMAIN-SUFFIX,hwcdn.net,Config_Lu
+  - DOMAIN-SUFFIX,ifixit.com,Config_Lu
+  - DOMAIN-SUFFIX,iphone4hongkong.com,Config_Lu
+  - DOMAIN-SUFFIX,iphonetaiwan.org,Config_Lu
+  - DOMAIN-SUFFIX,iptvbin.com,Config_Lu
+  - DOMAIN-SUFFIX,linksalpha.com,Config_Lu
+  - DOMAIN-SUFFIX,manyvids.com,Config_Lu
+  - DOMAIN-SUFFIX,myactimes.com,Config_Lu
+  - DOMAIN-SUFFIX,newsblur.com,Config_Lu
+  - DOMAIN-SUFFIX,now.im,Config_Lu
+  - DOMAIN-SUFFIX,nowe.com,Config_Lu
+  - DOMAIN-SUFFIX,redditlist.com,Config_Lu
+  - DOMAIN-SUFFIX,s3.amazonaws.com,Config_Lu
+  - DOMAIN-SUFFIX,signal.org,Config_Lu
+  - DOMAIN-SUFFIX,smartmailcloud.com,Config_Lu
+  - DOMAIN-SUFFIX,sparknotes.com,Config_Lu
+  - DOMAIN-SUFFIX,streetvoice.com,Config_Lu
+  - DOMAIN-SUFFIX,supertop.co,Config_Lu
+  - DOMAIN-SUFFIX,tv.com,Config_Lu
+  - DOMAIN-SUFFIX,typepad.com,Config_Lu
+  - DOMAIN-SUFFIX,udnbkk.com,Config_Lu
+  - DOMAIN-SUFFIX,urbanairship.com,Config_Lu
+  - DOMAIN-SUFFIX,whispersystems.org,Config_Lu
+  - DOMAIN-SUFFIX,wikia.com,Config_Lu
+  - DOMAIN-SUFFIX,wn.com,Config_Lu
+  - DOMAIN-SUFFIX,wolframalpha.com,Config_Lu
+  - DOMAIN-SUFFIX,x-art.com,Config_Lu
+  - DOMAIN-SUFFIX,yimg.com,Config_Lu
+  - DOMAIN,api.steampowered.com,Config_Lu
+  - DOMAIN,store.steampowered.com,Config_Lu
+
+  # > Apple
+  # - DOMAIN-SUFFIX,aaplimg.com,Apple
+  # - DOMAIN-SUFFIX,apple.co,Apple
+  # - DOMAIN-SUFFIX,apple.com,Apple
+  # - DOMAIN-SUFFIX,apple.com.cn,Apple
+  # - DOMAIN-SUFFIX,apple-cloudkit.com,Apple
+  # - DOMAIN-SUFFIX,appstore.com,Apple
+  # - DOMAIN-SUFFIX,cdn-apple.com,Apple
+  # - DOMAIN-SUFFIX,crashlytics.com,Apple
+  # - DOMAIN-SUFFIX,icloud.com,Apple
+  # - DOMAIN-SUFFIX,icloud.com.cn,Apple
+  # - DOMAIN-SUFFIX,icloud-content.com,Apple
+  # - DOMAIN-SUFFIX,me.com,Apple
+  # - DOMAIN-SUFFIX,mzstatic.com,Apple
+  # - DOMAIN,www-cdn.icloud.com.akadns.net,Apple
+  # - IP-CIDR,17.0.0.0/8,Apple,no-resolve
+
+  # Local Area Network
+  - IP-CIDR,192.168.0.0/16,DIRECT
+  - IP-CIDR,10.0.0.0/8,DIRECT
+  - IP-CIDR,172.16.0.0/12,DIRECT
+  - IP-CIDR,127.0.0.0/8,DIRECT
+  - IP-CIDR,100.64.0.0/10,DIRECT
+
+  # DNSPod Public DNS+
+  - IP-CIDR,119.28.28.28/32,DIRECT,no-resolve
+  # GeoIP China
+  - GEOIP,CN,DIRECT
+
+  - MATCH,FINAL
