@@ -55,7 +55,7 @@ proxies:
   - { name: '韩国.A', type: trojan, server: fast.cutecloud.link, port: 52301, password: 20d3bae6-fa82-4caa-899b-ea25f1bce5e0, udp: true, sni: zs.cloud-services.top }
   - { name: '俄罗斯.A', type: ss, server: west.cutecloud.link, port: 52911, cipher: chacha20-ietf-poly1305, password: 20d3bae6-fa82-4caa-899b-ea25f1bce5e0, udp: true }
 
-Config_Lu-groups:
+proxy-groups:
   - { name: Config_Lu, type: select, proxies: [Woodpecker_noerror, 'Trojan-Singapore', 'Trojan-New Jersey'] }
   - { name: FINAL, type: select, proxies: [DIRECT, Woodpecker_noerror, 'Trojan-Singapore', 'Trojan-New Jersey'] }
   - { name: Woodpecker_noerror, type: url-test, proxies: ['日本.Y', '香港.B', '台湾.A', '台湾.Y', '东京.A', '东京.B', '东京.C', '日本.A', '新加坡.C', '马来西亚.A', '韩国.A', '俄罗斯.A'], url: 'http://www.gstatic.com/generate_204', interval: 300 }
