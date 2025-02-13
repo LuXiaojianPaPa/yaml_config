@@ -73,6 +73,7 @@ rules:
   # > Personal Use(for website)
   - DOMAIN-SUFFIX,vultr.com,DIRECT
   - DOMAIN-SUFFIX,synology.me,DIRECT
+  - DOMAIN-SUFFIX,z-lib.gs,Config_Lu
   # > ChatGPT
   - DOMAIN-SUFFIX,chatgpt.com,Config_Lu
   - DOMAIN-SUFFIX,openai.com,Config_Lu
