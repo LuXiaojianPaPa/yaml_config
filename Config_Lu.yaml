@@ -74,6 +74,7 @@ rules:
   - DOMAIN-SUFFIX,vultr.com,DIRECT
   - DOMAIN-SUFFIX,synology.me,DIRECT
   - DOMAIN-SUFFIX,z-lib.gs,Config_Lu
+  - DOMAIN-KEYWORD,interactivebrokers,DIRECT
   # > ChatGPT
   - DOMAIN-SUFFIX,chatgpt.com,Config_Lu
   - DOMAIN-SUFFIX,openai.com,Config_Lu
