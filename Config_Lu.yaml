@@ -40,7 +40,7 @@ dns:
 
 
 proxies:
-  - { name: 'Trojan-Singapore', type: trojan, server: tg.luwangxinqi.me, port: 443, password: vaGXL3J9Oljuc7rX, udp: true, sni: tg.luwangxinqi.me }
+  - { name: 'Trojan-Singapore', type: trojan, server: tg.luwangxinqi.me, port: 443, password: hDkqSwEHySGLFdrd, udp: true, sni: tg.luwangxinqi.me }
   - { name: '香港.B', type: trojan, server: east.cutecloud.link, port: 52002, password: 20d3bae6-fa82-4caa-899b-ea25f1bce5e0, udp: true, sni: zs.cloud-services.top }
   - { name: '台湾.A', type: trojan, server: best.cutecloud.link, port: 52924, password: 20d3bae6-fa82-4caa-899b-ea25f1bce5e0, udp: true, sni: zs.cloud-services.top }
   - { name: '台湾.Y', type: trojan, server: twy.cloud-services.top, port: 443, password: 20d3bae6-fa82-4caa-899b-ea25f1bce5e0, udp: true, sni: zs.cloud-services.top }
