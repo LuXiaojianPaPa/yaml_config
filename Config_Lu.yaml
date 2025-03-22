@@ -65,7 +65,7 @@ rules:
 
   # > Personal Use
   # > Personal Use(for app)
-  - PROCESS-NAME,com.woodpecker.wwatch,Woodpecker_noerror
+#  - PROCESS-NAME,com.woodpecker.wwatch,Woodpecker_noerror
   - PROCESS-NAME,com.fehorizon.feportal,DIRECT
   - PROCESS-NAME,hello.litiaotiao.app,REJECT
   - PROCESS-NAME,com.talkme.ai.language,Config_Lu
