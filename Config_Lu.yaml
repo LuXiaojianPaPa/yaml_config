@@ -55,7 +55,7 @@ proxies:
 
 proxy-groups:
   - { name: Config_Lu, type: select, proxies: [Woodpecker_noerror, 'Trojan-Singapore'] }
-  - { name: FINAL, type: select, proxies: [DIRECT, Woodpecker_noerror, 'Trojan-Singapore'] }
+  - { name: FINAL, type: select, proxies: [DIRECT, 'Trojan-Singapore'] }
 #  - { name: Woodpecker_noerror, type: url-test, proxies: ['香港.B', '台湾.A', '台湾.Y', '东京.A', '东京.B', '东京.C', '日本.A', '新加坡.C', '马来西亚.A', '韩国.A', '俄罗斯.A'], url: 'http://www.gstatic.com/generate_204', interval: 300 }
   # Apple 服务代理
   # - { name: "Apple", type: select, proxies: [DIRECT, "Trojan-Singapore", "ZuiMY"]}
