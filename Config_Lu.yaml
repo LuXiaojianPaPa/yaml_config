@@ -41,20 +41,9 @@ dns:
 
 proxies:
   - { name: 'Trojan-Singapore', type: trojan, server: 8.219.13.148, port: 4433, password: hDkqSwEHySGLFdrd, udp: true, sni: tg.luwangxinqi.me }
-#  - { name: '香港.B', type: trojan, server: east.cutecloud.link, port: 52002, password: 20d3bae6-fa82-4caa-899b-ea25f1bce5e0, udp: true, sni: zs.cloud-services.top }
-#  - { name: '台湾.A', type: trojan, server: best.cutecloud.link, port: 52924, password: 20d3bae6-fa82-4caa-899b-ea25f1bce5e0, udp: true, sni: zs.cloud-services.top }
-#  - { name: '台湾.Y', type: trojan, server: twy.cloud-services.top, port: 443, password: 20d3bae6-fa82-4caa-899b-ea25f1bce5e0, udp: true, sni: zs.cloud-services.top }
-#  - { name: '东京.A', type: trojan, server: fast.cutecloud.link, port: 52101, password: 20d3bae6-fa82-4caa-899b-ea25f1bce5e0, udp: true, sni: zs.cloud-services.top }
-#  - { name: '东京.B', type: trojan, server: fast.cutecloud.link, port: 52102, password: 20d3bae6-fa82-4caa-899b-ea25f1bce5e0, udp: true, sni: zs.cloud-services.top }
-#  - { name: '东京.C', type: trojan, server: fast.cutecloud.link, port: 52103, password: 20d3bae6-fa82-4caa-899b-ea25f1bce5e0, udp: true, sni: zs.cloud-services.top }
-#  - { name: '日本.A', type: trojan, server: fast.cutecloud.link, port: 52111, password: 20d3bae6-fa82-4caa-899b-ea25f1bce5e0, udp: true, sni: zs.cloud-services.top }
-#  - { name: '新加坡.C', type: trojan, server: best.cutecloud.link, port: 52203, password: 20d3bae6-fa82-4caa-899b-ea25f1bce5e0, udp: true, sni: zs.cloud-services.top }
-#  - { name: '马来西亚.A', type: trojan, server: best.cutecloud.link, port: 52901, password: 20d3bae6-fa82-4caa-899b-ea25f1bce5e0, udp: true, sni: zs.cloud-services.top }
-#  - { name: '韩国.A', type: trojan, server: fast.cutecloud.link, port: 52301, password: 20d3bae6-fa82-4caa-899b-ea25f1bce5e0, udp: true, sni: zs.cloud-services.top }
-#  - { name: '俄罗斯.A', type: ss, server: west.cutecloud.link, port: 52911, cipher: chacha20-ietf-poly1305, password: 20d3bae6-fa82-4caa-899b-ea25f1bce5e0, udp: true }
 
 proxy-groups:
-  - { name: Config_Lu, type: select, proxies: [Woodpecker_noerror, 'Trojan-Singapore'] }
+  - { name: Config_Lu, type: select, proxies: ['Trojan-Singapore'] }
   - { name: FINAL, type: select, proxies: [DIRECT, 'Trojan-Singapore'] }
 #  - { name: Woodpecker_noerror, type: url-test, proxies: ['香港.B', '台湾.A', '台湾.Y', '东京.A', '东京.B', '东京.C', '日本.A', '新加坡.C', '马来西亚.A', '韩国.A', '俄罗斯.A'], url: 'http://www.gstatic.com/generate_204', interval: 300 }
   # Apple 服务代理
