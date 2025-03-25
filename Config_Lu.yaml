@@ -112,6 +112,7 @@ rules:
   - PROCESS-NAME,com.talkme.ai.language,Config_Lu
   - PROCESS-NAME,atws.app,DIRECT
   # > Personal Use(for website)
+  - DOMAIN-SUFFIX,luwangxinqi.me,Config_Lu
   - DOMAIN-SUFFIX,vultr.com,DIRECT
   - DOMAIN-SUFFIX,synology.me,DIRECT
   - DOMAIN-SUFFIX,z-lib.gs,Config_Lu
