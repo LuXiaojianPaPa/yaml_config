@@ -106,8 +106,7 @@ rules:
 
   # > Personal Use
   # > Personal Use(for app)
-#  - PROCESS-NAME,com.woodpecker.wwatch,Woodpecker_noerror
-  - PROCESS-NAME,com.fehorizon.feportal,DIRECT
+  #  - PROCESS-NAME,com.woodpecker.wwatch,Woodpecker_noerror
   - PROCESS-NAME,hello.litiaotiao.app,REJECT
   - PROCESS-NAME,com.talkme.ai.language,Config_Lu
   - PROCESS-NAME,atws.app,DIRECT
@@ -121,45 +120,7 @@ rules:
   # > ChatGPT
   - DOMAIN-SUFFIX,chatgpt.com,Config_Lu
   - DOMAIN-SUFFIX,openai.com,Config_Lu
-
-  # 广告屏蔽
-  # Google 广告
-  - DOMAIN-SUFFIX,adservice.google.com,REJECT
-  - DOMAIN-SUFFIX,pagead2.googlesyndication.com,REJECT
-  - DOMAIN-SUFFIX,googleads.g.doubleclick.net,REJECT
-  - DOMAIN-SUFFIX,ad.doubleclick.net,REJECT
-  # YouTube 广告
-  - DOMAIN-SUFFIX,s.youtube.com,REJECT
-  - DOMAIN-SUFFIX,video-stats.video.google.com,REJECT
-  # Facebook 广告
-  - DOMAIN-SUFFIX,ads.facebook.com,REJECT
-  - DOMAIN-SUFFIX,connect.facebook.net,REJECT
-  # Yahoo/Bing 广告
-  - DOMAIN-SUFFIX,ads.yahoo.com,REJECT
-  - DOMAIN-SUFFIX,bingads.microsoft.com,REJECT
-  # 亚马逊广告
-  - DOMAIN-SUFFIX,c.amazon-adsystem.com,REJECT
-  - DOMAIN-SUFFIX,mads.amazon-adsystem.com,REJECT
-  # 其他常见广告平台
-  - DOMAIN-SUFFIX,ad.yieldlab.net,REJECT
-  - DOMAIN-SUFFIX,track.adform.net,REJECT
-  - DOMAIN-SUFFIX,ib.adnxs.com,REJECT
-  - DOMAIN-SUFFIX,admixer.net,REJECT
-  - DOMAIN-SUFFIX,adserver.me,REJECT
-  - DOMAIN-SUFFIX,adsafeprotected.com,REJECT
-  - DOMAIN-SUFFIX,doubleclick.net,REJECT
-  - DOMAIN-SUFFIX,adroll.com,REJECT
-  - DOMAIN-SUFFIX,ad.360yield.com,REJECT
-  - DOMAIN-SUFFIX,appsflyer.com,REJECT
-  - DOMAIN-SUFFIX,taboola.com,REJECT
-  - DOMAIN-SUFFIX,adobe.demdex.net,REJECT
-  # 广告分析服务
-  - DOMAIN-SUFFIX,google-analytics.com,REJECT
-  - DOMAIN-SUFFIX,analytics.yahoo.com,REJECT
-  - DOMAIN-SUFFIX,ads-twitter.com,REJECT
-  - DOMAIN-SUFFIX,pixel.facebook.com,REJECT
-  - DOMAIN-SUFFIX,cdn.adsafeprotected.com,REJECT
-
+  
   # Unbreak
   # > Google
   - DOMAIN-SUFFIX,googletraveladservices.com,DIRECT
