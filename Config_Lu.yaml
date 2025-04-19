@@ -40,7 +40,7 @@ dns:
 
 
 proxies:
-  - { name: 'Trojan-Singapore', type: trojan, server: tg.stephenlu.cc, port: 4433, password: LucpYvspuD5Tuuv6, udp: true, sni: tg.stephenlu.cc }
+  - { name: 'Trojan-Singapore', type: trojan, server: 8.219.13.148, port: 4433, password: LucpYvspuD5Tuuv6, udp: true, sni: tg.stephenlu.cc }
   - { name: '🇭🇰 香港.Y | 直连 | Trojan', type: trojan, server: hky.cloud-services.top, port: 443, password: 20d3bae6-fa82-4caa-899b-ea25f1bce5e0, udp: true }
   - { name: '🇭🇰 香港.Z | 直连 | Trojan', type: trojan, server: hkz.cloud-services.top, port: 55116, password: 20d3bae6-fa82-4caa-899b-ea25f1bce5e0, udp: true, sni: hkz.cloud-services.top }
   - { name: '🇯🇵 日本.Y | 直连 | Trojan', type: trojan, server: jpy.cloud-services.top, port: 443, password: 20d3bae6-fa82-4caa-899b-ea25f1bce5e0, udp: true, sni: zs.cloud-services.top }
