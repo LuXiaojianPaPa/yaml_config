@@ -115,6 +115,7 @@ rules:
   - DOMAIN-SUFFIX,cute-cloud.de,Config_Lu
   - DOMAIN-SUFFIX,luwangxinqi.me,Config_Lu
   - DOMAIN-SUFFIX,vultr.com,DIRECT
+  - DOMAIN-SUFFIX,utfinancing.com,DIRECT
   - DOMAIN-SUFFIX,synology.me,DIRECT
   - DOMAIN-SUFFIX,z-lib.gs,Config_Lu
   - DOMAIN-KEYWORD,interactivebrokers,DIRECT
