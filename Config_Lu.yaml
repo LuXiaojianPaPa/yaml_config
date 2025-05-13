@@ -41,7 +41,7 @@ dns:
 
 proxies:
   #- {name: "Trojan-WS-CDN", type: trojan, server: tr.stephenlu.cc, port: 443, password: LucpYvspuD5Tuuv6, sni: tr.stephenlu.cc, skip-cert-verify: false, network: ws, ws-opts: {path: "/login", headers: {Host: tr.stephenlu.cc}}}
-  - { name: 'Trojan-Singapore', type: trojan, server: tr1.stephenlu.cc, port: 443, password: LucpYvspuD5Tuuv6, sni: tr1.stephenlu.cc }
+  - { name: 'Trojan-Singapore', type: trojan, server: tr1.stephenlu.cc, port: 443, password: LucpYvspuD5Tuuv6, udp: true, sni: tr1.stephenlu.cc }
   - { name: '🇭🇰 香港.Y | 直连 | Trojan', type: trojan, server: hky.cloud-services.top, port: 443, password: 20d3bae6-fa82-4caa-899b-ea25f1bce5e0, udp: true }
   - { name: '🇭🇰 香港.Z | 直连 | Trojan', type: trojan, server: hkz.cloud-services.top, port: 55116, password: 20d3bae6-fa82-4caa-899b-ea25f1bce5e0, udp: true, sni: hkz.cloud-services.top }
   - { name: '🇯🇵 日本.Y | 直连 | Trojan', type: trojan, server: jpy.cloud-services.top, port: 443, password: 20d3bae6-fa82-4caa-899b-ea25f1bce5e0, udp: true, sni: zs.cloud-services.top }
