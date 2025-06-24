@@ -111,6 +111,7 @@ rules:
   - PROCESS-NAME,hello.litiaotiao.app,REJECT
   - PROCESS-NAME,com.talkme.ai.language,Config_Lu
   - PROCESS-NAME,atws.app,DIRECT
+  - PROCESS-NAME,com.utflc.haitong.hxlx.oa,DIRECT
   # > Personal Use(for website)
   - DOMAIN-SUFFIX,firebaseapp.com,Config_Lu
   - DOMAIN-SUFFIX,truthsocial.com,Config_Lu
