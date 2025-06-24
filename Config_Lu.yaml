@@ -121,6 +121,7 @@ rules:
   - DOMAIN-SUFFIX,utfinancing.com,DIRECT
   - DOMAIN-SUFFIX,synology.me,DIRECT
   - DOMAIN-SUFFIX,z-lib.gs,Config_Lu
+  - DOMAIN-SUFFIX,blender.org,DIRECT
   - DOMAIN-KEYWORD,interactivebrokers,DIRECT
   - DOMAIN-KEYWORD,ibkr,DIRECT
   # > ChatGPT
