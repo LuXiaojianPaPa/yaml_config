@@ -66,7 +66,7 @@ rules:
   - DOMAIN-SUFFIX,vultr.com,DIRECT
   - DOMAIN-SUFFIX,utfinancing.com,DIRECT
   - DOMAIN-SUFFIX,synology.me,DIRECT
-  - DOMAIN-SUFFIX,z-lib.gs,Config_Lu
+  - DOMAIN-KEYWORD,z-library,Config_Lu
   - DOMAIN-SUFFIX,blender.org,DIRECT
   - DOMAIN-KEYWORD,aliyuncs.com,DIRECT
   # > ChatGPT
@@ -913,4 +913,5 @@ rules:
   - GEOIP,CN,DIRECT
 
   - MATCH,FINAL
+
 
