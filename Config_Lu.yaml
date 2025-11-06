@@ -59,6 +59,7 @@ rules:
   - PROCESS-NAME,com.utflc.haitong.hxlx.oa,DIRECT
   # > Personal Use(for website)
   - DOMAIN-KEYWORD,interactivebrokers,Config_Lu
+  - DOMAIN-SUFFIX,time.com,Config_Lu
   - DOMAIN-SUFFIX,firebaseapp.com,Config_Lu
   - DOMAIN-SUFFIX,truthsocial.com,Config_Lu
   - DOMAIN-SUFFIX,cute-cloud.de,Config_Lu
@@ -913,5 +914,6 @@ rules:
   - GEOIP,CN,DIRECT
 
   - MATCH,FINAL
+
 
 
