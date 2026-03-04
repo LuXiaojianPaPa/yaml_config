@@ -58,6 +58,7 @@ rules:
   - PROCESS-NAME,atws.app,DIRECT
   - PROCESS-NAME,com.utflc.haitong.hxlx.oa,DIRECT
   # > Personal Use(for website)
+  - DOMAIN-SUFFIX,x.com,Config_Lu
   - DOMAIN-SUFFIX,lumalabs.ai,Config_Lu
   - DOMAIN-SUFFIX,civitai.com,Config_Lu
   - DOMAIN-SUFFIX,perplexity.ai,Config_Lu
@@ -919,6 +920,7 @@ rules:
   - GEOIP,CN,DIRECT
 
   - MATCH,FINAL
+
 
 
 
