@@ -59,7 +59,7 @@ rules:
   - PROCESS-NAME,com.utflc.haitong.hxlx.oa,DIRECT
   # > Personal Use(for website)
   - DOMAIN-SUFFIX,x.com,Config_Lu
-  - DOMAIN-SUFFIX,zaobao.com,Config_Lu
+  - DOMAIN-KEYWORD,zaobao.com,Config_Lu
   - DOMAIN-SUFFIX,lumalabs.ai,Config_Lu
   - DOMAIN-SUFFIX,civitai.com,Config_Lu
   - DOMAIN-SUFFIX,perplexity.ai,Config_Lu
