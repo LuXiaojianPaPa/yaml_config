@@ -41,11 +41,11 @@ dns:
 
 proxies:
   - { name: 'Trojan-Singapore', type: trojan, server: tr1.stephenlu.cc, port: 443, password: LucpYvspuD5Tuuv6, udp: true, sni: tr1.stephenlu.cc }
+  - { name: 'Xray-REALITY', type: vless, server: tr1.stephenlu.cc, port: 8443, uuid: f6de2a7b-dee3-4f37-80bd-fba649f8f0f1, udp: true, tls: true, flow: xtls-rprx-vision, servername: www.microsoft.com, network: tcp, reality-opts: { public-key: uQegVTBU5POhMf7tv5SRSN5BIhMS2fyTbeRrljc30wI, short-id: 16fd2700605a }, client-fingerprint: chrome }
 
 proxy-groups:
-  - { name: Config_Lu, type: select, proxies: ['Trojan-Singapore'] }
-  - { name: FINAL, type: select, proxies: [DIRECT, 'Trojan-Singapore'] }
-#  - { name: CuteCloud, type: url-test, proxies: ['🇭🇰 香港.Y | 直连 | Trojan', '🇭🇰 香港.Z | 直连 | Trojan', '🇯🇵 日本.Y | 直连 | Trojan', '🇭🇰 香港.A | 中转 | Trojan', '🇭🇰 香港.B | 中转 | Trojan', '🇭🇰 香港.C | 中转 | Trojan', '🇭🇰 香港.X | 专线 | Trojan', '🇹🇼 台湾.A | 中转 | Trojan', '🇹🇼 台湾.X | 专线 | Trojan', '🇹🇼 台湾.Y | 直连 | Trojan', '🇹🇼 台湾.Z | 直连 | Trojan', '🇹🇼 台湾.X | 专线', '🇯🇵 东京.A | 中转 | Trojan', '🇯🇵 东京.B | 中转 | Trojan', '🇯🇵 东京.C | 中转 | Trojan', '🇯🇵 东京.X | 专线 | Trojan', '🇯🇵 日本.A | 中转 | Trojan', '🇸🇬 新加坡.A | 中转 | Trojan', '🇸🇬 新加坡.B | 中转 | Trojan', '🇸🇬 新加坡.C | 中转 | Trojan', '🇸🇬 新加坡.X | 专线 | Trojan', '🇺🇸 美国.A | 中转 | Trojan', '🇺🇸 美国.B | 中转 | Trojan', '🇺🇸 美国.C | 中转 | Trojan', '🇺🇸 美国.X | 专线 | Trojan', '🇺🇸 美国.X | 专线', '🇨🇦 加拿大.A | 中转', '🇨🇦 加拿大.X | 专线', '🇲🇾 马来西亚.A | 中转', '🇲🇾 马来西亚.X | 专线', '🇰🇷 韩国.A | 中转 | Trojan', '🇰🇷 韩国.X | 专线 | Trojan', '🇮🇳 印度.A | 中转', '🇮🇳 印度.X | 专线', '🇹🇷 土耳其.A | 中转', '🇩🇪 德国.A | 中转', '🇬🇧 英国.A | 中转 | Trojan', '🇫🇷 法国.A | 中转', '🇫🇷 法国.X | 专线', '🇦🇺 澳洲.A | 中转', '🇦🇺 澳洲.X | 专线', '🇸🇦 沙特.A | 中转', '🇸🇦 沙特.X | 专线', '🇧🇷 巴西.A | 中转', '🇧🇷 巴西.X | 专线', '🇨🇱 智利.A | 中转', '🇮🇹 意大利.A | 中转', '🇦🇪 阿联酋.A | 中转', '🇷🇺 俄罗斯.A | 中转', '🇿🇦 南非.A | 中转', '🇳🇱 荷兰.X | 专线'], url: 'http://www.gstatic.com/generate_204', interval: 300 }
+  - { name: Config_Lu, type: select, proxies: ['Trojan-Singapore', 'Xray-REALITY'] }
+  - { name: FINAL, type: select, proxies: [DIRECT, 'Trojan-Singapore', 'Xray-REALITY'] }
 
 # 规则
 rules:
