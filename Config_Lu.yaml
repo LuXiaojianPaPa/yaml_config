@@ -41,7 +41,7 @@ dns:
 
 proxies:
   - { name: 'Trojan-Singapore', type: trojan, server: tr1.stephenlu.cc, port: 443, password: LucpYvspuD5Tuuv6, udp: true, sni: tr1.stephenlu.cc }
-  - { name: 'Xray-REALITY', type: vless, server: tr1.stephenlu.cc, port: 8443, uuid: f6de2a7b-dee3-4f37-80bd-fba649f8f0f1, udp: true, tls: true, flow: xtls-rprx-vision, servername: www.microsoft.com, network: tcp, reality-opts: { public-key: uQegVTBU5POhMf7tv5SRSN5BIhMS2fyTbeRrljc30wI, short-id: 16fd2700605a }, client-fingerprint: chrome }
+  - { name: 'Xray-REALITY', type: vless, server: tr1.stephenlu.cc, port: 8443, uuid: f6de2a7b-dee3-4f37-80bd-fba649f8f0f1, udp: true, tls: true, flow: xtls-rprx-vision, servername: dl.google.com, network: tcp, reality-opts: { public-key: uQegVTBU5POhMf7tv5SRSN5BIhMS2fyTbeRrljc30wI, short-id: 16fd2700605a }, client-fingerprint: chrome }
 
 proxy-groups:
   - { name: Config_Lu, type: select, proxies: ['Trojan-Singapore', 'Xray-REALITY'] }
