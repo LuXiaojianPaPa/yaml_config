@@ -77,6 +77,8 @@ rules:
   - DOMAIN-KEYWORD,z-library,Config_Lu
   - DOMAIN-SUFFIX,blender.org,DIRECT
   - DOMAIN-KEYWORD,aliyuncs.com,DIRECT
+  - nmcheck.gnome.org,DIRECT
+  - connectivity-check.ubuntu.com,DIRECT
   # > ChatGPT
   - DOMAIN-SUFFIX,chatgpt.com,Config_Lu
   - DOMAIN-SUFFIX,openai.com,Config_Lu
