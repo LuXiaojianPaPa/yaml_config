@@ -79,6 +79,7 @@ rules:
   - DOMAIN-KEYWORD,aliyuncs.com,DIRECT
   - DOMAIN-SUFFIX,nmcheck.gnome.org,DIRECT
   - DOMAIN-SUFFIX,connectivity-check.ubuntu.com,DIRECT
+  - DOMAIN-SUFFIX,wenxuecity.com,Config_Lu
   # > ChatGPT
   - DOMAIN-SUFFIX,chatgpt.com,Config_Lu
   - DOMAIN-SUFFIX,openai.com,Config_Lu
